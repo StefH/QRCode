@@ -177,9 +177,9 @@ namespace QRCodeDecoderLibrary
 
                 _logger.LogDebug("Search for QR corners");
             }
-            catch (Exception ex)
+            catch
             {
-                _logger.LogError(new EventId(1000), ex, "QR Code decoding failed (no finders).");
+                _logger.LogDebug("QR Code decoding failed (no finders).");
                 return null;
             }
 
@@ -840,9 +840,9 @@ namespace QRCodeDecoderLibrary
                 // successful exit
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
-                _logger.LogError(new EventId(1001), "Get QR Code corner info exception.", ex);
+                _logger.LogDebug("Get QR Code corner info.");
                 return false;
             }
         }
@@ -892,9 +892,9 @@ namespace QRCodeDecoderLibrary
                 // successful exit
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
-                _logger.LogError(new EventId(1000), "Decode QR code exception.", ex);
+                _logger.LogDebug("Decode QR code exception.");
                 return false;
             }
         }

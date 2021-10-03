@@ -35,3 +35,6 @@ for (int i = 0; i < 4; i++)
 
 logger.LogWarning("Source filename '{0}'", "source-damaged-skewing_and_noise.png");
 fixer.FixAndSaveAsPng("source-damaged-skewing_and_noise.png", "source-fixed-skewing_and_noise.png");
+
+logger.LogWarning("Source filename '{0}'", "m-nl.png");
+fixer.FixAndSaveAsPng(@"c:\tmp\m-nl.png", @"c:\tmp\m-nl-fixed.png");

@@ -57,7 +57,7 @@ namespace QRCodeFixerLibrary
             }
 
             string text = QRDecoder.ByteArrayToString(data[0]);
-            _logger.LogInformation("Text = {text}", text);
+            _logger.LogInformation("Text = {0}", text);
 
             var encoder = new QRCodeEncoder
             {

@@ -23,11 +23,6 @@ namespace QRCodeEncoderLibrary
             Guard.NotNullOrEmpty(filename, nameof(filename));
             Guard.Condition(filename, f => filename.EndsWith(".png"), nameof(filename));
 
-            if (QRCodeMatrix == null)
-            {
-                throw new InvalidOperationException("QRCode must be encoded first");
-            }
-
             // file name to stream
             using (Stream OutputStream = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.None))
             {
@@ -167,7 +162,7 @@ namespace QRCodeEncoderLibrary
             return image;
         }
 #endif
-        internal byte[] BuildPngHeader()
+        private byte[] BuildPngHeader()
         {
             // header
             byte[] header = new byte[25];
@@ -222,7 +217,7 @@ namespace QRCodeEncoderLibrary
             return header;
         }
 
-        internal static byte[] PngImageData(byte[] inputBuf)
+        private static byte[] PngImageData(byte[] inputBuf)
         {
             // output buffer is:
             // Png IDAT length 4 bytes
