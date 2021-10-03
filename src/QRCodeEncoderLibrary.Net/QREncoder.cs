@@ -242,10 +242,14 @@ namespace QRCodeEncoderLibrary
                 if (DataSeg == null) dataSegmentArray[SegIndex] = new byte[0];
                 else Bytes += DataSeg.Length;
             }
-            if (Bytes == 0) throw new ArgumentException("There is no data to encode.");
+
+            if (Bytes == 0)
+            {
+                throw new ArgumentException("There is no data to encode.");
+            }
 
             // save data segments array
-            this.DataSegArray = dataSegmentArray;
+            DataSegArray = dataSegmentArray;
 
             // initialization
             Initialization();
@@ -1284,7 +1288,6 @@ namespace QRCodeEncoderLibrary
         // Apply Mask 4
         // ((row / 2) + (column / 3)) % 2 == 0
         ////////////////////////////////////////////////////////////////////
-
         internal void ApplyMask4()
         {
             for (int Row = 0; Row < QRCodeDimension; Row += 4) for (int Col = 0; Col < QRCodeDimension; Col += 6)
@@ -1305,7 +1308,6 @@ namespace QRCodeEncoderLibrary
                     if ((MaskMatrix[Row + 3, Col + 4] & NonData) == 0) MaskMatrix[Row + 3, Col + 4] ^= 1;
                     if ((MaskMatrix[Row + 3, Col + 5] & NonData) == 0) MaskMatrix[Row + 3, Col + 5] ^= 1;
                 }
-            return;
         }
 
         ////////////////////////////////////////////////////////////////////

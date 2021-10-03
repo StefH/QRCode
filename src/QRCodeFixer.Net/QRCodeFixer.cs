@@ -4,43 +4,49 @@ using System.Drawing;
 using System.Drawing.Imaging;
 #endif
 using System.IO;
+using System.Text;
+using Microsoft.Extensions.Logging;
 using QRCodeDecoderLibrary;
 using QRCodeEncoderLibrary;
 using Stef.Validation;
 
-
-namespace QRCodeFixer
+namespace QRCodeFixerLibrary
 {
-    public static class QRFixer
+    public class QRCodeFixer
     {
-        public static void FixAndSaveAsPng(string sourceFilename, string destinationFilename, TextWriter textWriter = null)
+        private readonly ILogger _logger;
+        private readonly IServiceProvider _serviceProvider;
+
+        public QRCodeFixer(ILogger<QRCodeFixer> logger, IServiceProvider serviceProvider)
+        {
+            _logger = Guard.NotNull(logger, nameof(logger));
+            _serviceProvider = Guard.NotNull(serviceProvider, nameof(serviceProvider));
+        }
+
+        public void FixAndSaveAsPng(string sourceFilename, string destinationFilename)
         {
             Guard.NotNullOrEmpty(sourceFilename, nameof(sourceFilename));
             Guard.NotNullOrEmpty(destinationFilename, nameof(destinationFilename));
             Guard.Condition(destinationFilename, f => destinationFilename.EndsWith(".png", StringComparison.OrdinalIgnoreCase), nameof(destinationFilename));
 
-            var encoder = FixInternal(sourceFilename, textWriter);
+            var encoder = FixInternal(sourceFilename);
             encoder.SaveQRCodeToPngFile(destinationFilename);
         }
 
 #if NET45_OR_GREATER
-        public static void FixAndSave(string sourceFilename, string destinationFilename, ImageFormat imageFormat, TextWriter textWriter = null)
+        public void FixAndSave(string sourceFilename, string destinationFilename, ImageFormat imageFormat)
         {
             Guard.NotNullOrEmpty(sourceFilename, nameof(sourceFilename));
             Guard.NotNullOrEmpty(destinationFilename, nameof(destinationFilename));
 
-            var encoder = FixInternal(sourceFilename, textWriter);
+            var encoder = FixInternal(sourceFilename);
             encoder.SaveQRCodeToFile(destinationFilename, imageFormat);
         }
 
 #endif
-        private static QRCodeEncoder FixInternal(string sourceFilename, TextWriter textWriter)
+        private QRCodeEncoder FixInternal(string sourceFilename)
         {
-#if DEBUG
-            textWriter ??= Console.Out;
-            QRCodeTrace.Open(textWriter);
-#endif
-            var decoder = new QRDecoder();
+            var decoder = (QRDecoder)_serviceProvider.GetService(typeof(QRDecoder));
 
             var sourceBitmap = new Bitmap(sourceFilename);
 
@@ -50,7 +56,8 @@ namespace QRCodeFixer
                 throw new ApplicationException();
             }
 
-            string text = QRDecoder.ByteArrayToStr(data[0]);
+            string text = QRDecoder.ByteArrayToString(data[0]);
+            _logger.LogInformation("Text = {text}", text);
 
             var encoder = new QRCodeEncoder
             {

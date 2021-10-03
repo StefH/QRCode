@@ -254,11 +254,11 @@ namespace QRCodeEncoderLibrary
             uint readAdler32 = Adler32.Checksum(inputBuf, 0, inputBuf.Length);
 
             // ZLib checksum is Adler32 write it big endian order, high byte first
-            int AdlerPtr = outputBuf.Length - 8;
-            outputBuf[AdlerPtr++] = (byte)(readAdler32 >> 24);
-            outputBuf[AdlerPtr++] = (byte)(readAdler32 >> 16);
-            outputBuf[AdlerPtr++] = (byte)(readAdler32 >> 8);
-            outputBuf[AdlerPtr] = (byte)readAdler32;
+            int adlerPtr = outputBuf.Length - 8;
+            outputBuf[adlerPtr++] = (byte)(readAdler32 >> 24);
+            outputBuf[adlerPtr++] = (byte)(readAdler32 >> 16);
+            outputBuf[adlerPtr++] = (byte)(readAdler32 >> 8);
+            outputBuf[adlerPtr] = (byte)readAdler32;
 
             // crc
             uint crc = CRC32.Checksum(outputBuf, 4, outputBuf.Length - 8);
@@ -276,7 +276,7 @@ namespace QRCodeEncoderLibrary
         internal byte[] QRCodeMatrixToPng()
         {
             // image width and height
-            int imageDimension = this.QRCodeImageDimension;
+            int imageDimension = QRCodeImageDimension;
 
             // width in bytes including filter leading byte
             int pngWidth = (imageDimension + 7) / 8 + 1;
