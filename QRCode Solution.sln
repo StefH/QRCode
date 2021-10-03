@@ -23,6 +23,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeFixer.Net", "src\QRCo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRFixer", "examples\QRFixer\QRFixer.csproj", "{4189ECC6-647A-49D4-BEB9-3EDFB1D7CBD0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReleaseNotes", "ReleaseNotes", "{75C52E84-CBFE-4A8B-959F-DA9489CA2C2E}"
+	ProjectSection(SolutionItems) = preProject
+		release\Generate-ReleaseNotes.bat = release\Generate-ReleaseNotes.bat
+		release\PackageReadme.md = release\PackageReadme.md
+		release\PackageReleaseNotes.template = release\PackageReleaseNotes.template
+		release\PackageReleaseNotes.txt = release\PackageReleaseNotes.txt
+		ReleaseNotes.md = ReleaseNotes.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +68,7 @@ Global
 		{33C1C968-3E83-44F1-A243-2908D4E1221E} = {EDDCBA37-7DB7-47DC-864C-7F5A75FFB142}
 		{AB530C03-02BA-47A0-857B-AC45B900DC5F} = {EDDCBA37-7DB7-47DC-864C-7F5A75FFB142}
 		{4189ECC6-647A-49D4-BEB9-3EDFB1D7CBD0} = {D17985C3-46AA-479A-8830-D54F4E4335DD}
+		{75C52E84-CBFE-4A8B-959F-DA9489CA2C2E} = {C2375969-569E-45C6-AA10-6285A723A5CB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {31409F78-5D04-4D1F-B390-076530995DEA}

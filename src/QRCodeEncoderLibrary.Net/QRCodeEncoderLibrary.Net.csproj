@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net45;netstandard1.3;netstandard2.0;netstandard2.1</TargetFrameworks>
-    <Description>The QR Code library allows your program to create (encode) QR Code image.</Description>
+    <Description>This QR Code library supports encoding a QR Code to an image.</Description>
     <RootNamespace>QRCodeEncoderLibrary</RootNamespace>
     <LangVersion>9</LangVersion>
   </PropertyGroup>
