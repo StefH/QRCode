@@ -6,7 +6,12 @@
     <!--<Nullable>enable</Nullable>-->
     <Description>The QR Code Fixer library allows you to repair an damaged QR Code image.</Description>
     <RootNamespace>QRCodeFixer</RootNamespace>
+    <PackageReadmeFile>QRCodeFixer.Net.PackageReadme.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../../release/QRCodeFixer.Net.PackageReadme.md" Pack="true" PackagePath=""/>
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\QRCodeDecoderLibrary.Net\QRCodeDecoderLibrary.Net.csproj" />

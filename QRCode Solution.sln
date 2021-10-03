@@ -26,9 +26,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReleaseNotes", "ReleaseNotes", "{75C52E84-CBFE-4A8B-959F-DA9489CA2C2E}"
 	ProjectSection(SolutionItems) = preProject
 		release\Generate-ReleaseNotes.bat = release\Generate-ReleaseNotes.bat
-		release\PackageReadme.md = release\PackageReadme.md
 		release\PackageReleaseNotes.template = release\PackageReleaseNotes.template
 		release\PackageReleaseNotes.txt = release\PackageReleaseNotes.txt
+		release\QRCodeFixer.Net.PackageReadme.md = release\QRCodeFixer.Net.PackageReadme.md
 		ReleaseNotes.md = ReleaseNotes.md
 	EndProjectSection
 EndProject

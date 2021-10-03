@@ -8,8 +8,7 @@
     <Authors>Uzi Granot;Stef Heyenrath</Authors>
     <PackageTags>QRCode, C#, Barcode, Encode, Decode, Fix, Repair</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
-    <!--<PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)/../../release/PackageReleaseNotes.txt"))</PackageReleaseNotes>-->
-    <PackageReadmeFile>PackageReadme.md</PackageReadmeFile>
+    <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)/../../release/PackageReleaseNotes.txt"))</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/StefH/QRCode</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/StefH/QRCode</RepositoryUrl>
@@ -21,6 +20,5 @@
 
   <ItemGroup>
     <None Include="../../resources/icon.png" Pack="true" PackagePath="" />
-    <None Include="../../release/PackageReadme.md" Pack="true" PackagePath=""/>
   </ItemGroup>
 </Project>
