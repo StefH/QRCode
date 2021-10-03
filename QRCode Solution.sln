@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31717.71
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EDDCBA37-7DB7-47DC-864C-7F5A75FFB142}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{D17985C3-46AA-479A-8830-D54F4E4335DD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C2375969-569E-45C6-AA10-6285A723A5CB}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeSharedLibrary.Net", "src\QRCodeSharedLibrary.Net\QRCodeSharedLibrary.Net.csproj", "{D74FE6C3-55F3-4857-BF87-580290F6375A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeEncoderLibrary.Net", "src\QRCodeEncoderLibrary.Net\QRCodeEncoderLibrary.Net.csproj", "{C4A05C67-7B00-4C92-9364-D4C17A9A30D9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeDecoderLibrary.Net", "src\QRCodeDecoderLibrary.Net\QRCodeDecoderLibrary.Net.csproj", "{33C1C968-3E83-44F1-A243-2908D4E1221E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeFixer.Net", "src\QRCodeFixer.Net\QRCodeFixer.Net.csproj", "{AB530C03-02BA-47A0-857B-AC45B900DC5F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRFixer", "examples\QRFixer\QRFixer.csproj", "{4189ECC6-647A-49D4-BEB9-3EDFB1D7CBD0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D74FE6C3-55F3-4857-BF87-580290F6375A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D74FE6C3-55F3-4857-BF87-580290F6375A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D74FE6C3-55F3-4857-BF87-580290F6375A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D74FE6C3-55F3-4857-BF87-580290F6375A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4A05C67-7B00-4C92-9364-D4C17A9A30D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4A05C67-7B00-4C92-9364-D4C17A9A30D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4A05C67-7B00-4C92-9364-D4C17A9A30D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4A05C67-7B00-4C92-9364-D4C17A9A30D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33C1C968-3E83-44F1-A243-2908D4E1221E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33C1C968-3E83-44F1-A243-2908D4E1221E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33C1C968-3E83-44F1-A243-2908D4E1221E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33C1C968-3E83-44F1-A243-2908D4E1221E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB530C03-02BA-47A0-857B-AC45B900DC5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB530C03-02BA-47A0-857B-AC45B900DC5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB530C03-02BA-47A0-857B-AC45B900DC5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB530C03-02BA-47A0-857B-AC45B900DC5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4189ECC6-647A-49D4-BEB9-3EDFB1D7CBD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4189ECC6-647A-49D4-BEB9-3EDFB1D7CBD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4189ECC6-647A-49D4-BEB9-3EDFB1D7CBD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4189ECC6-647A-49D4-BEB9-3EDFB1D7CBD0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D74FE6C3-55F3-4857-BF87-580290F6375A} = {EDDCBA37-7DB7-47DC-864C-7F5A75FFB142}
+		{C4A05C67-7B00-4C92-9364-D4C17A9A30D9} = {EDDCBA37-7DB7-47DC-864C-7F5A75FFB142}
+		{33C1C968-3E83-44F1-A243-2908D4E1221E} = {EDDCBA37-7DB7-47DC-864C-7F5A75FFB142}
+		{AB530C03-02BA-47A0-857B-AC45B900DC5F} = {EDDCBA37-7DB7-47DC-864C-7F5A75FFB142}
+		{4189ECC6-647A-49D4-BEB9-3EDFB1D7CBD0} = {D17985C3-46AA-479A-8830-D54F4E4335DD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {31409F78-5D04-4D1F-B390-076530995DEA}
+	EndGlobalSection
+EndGlobal

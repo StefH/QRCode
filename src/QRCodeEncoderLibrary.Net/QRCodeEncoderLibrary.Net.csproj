@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net45;netstandard1.3;netstandard2.0;netstandard2.1</TargetFrameworks>
+    <Description>The QR Code library allows your program to create (encode) QR Code image.</Description>
+    <RootNamespace>QRCodeEncoderLibrary</RootNamespace>
+    <LangVersion>9</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.1'">
+    <PackageReference Include="System.IO.Compression">
+      <Version>4.3.0</Version>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="QREncoderTables.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Stef.Validation" Version="0.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QRCodeSharedLibrary.Net\QRCodeSharedLibrary.Net.csproj" />
+  </ItemGroup>
+
+</Project>
