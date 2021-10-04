@@ -1,13 +1,13 @@
-﻿using System.IO;
+using System.IO;
 using System.IO.Compression;
 
 namespace QRCodeEncoderLibrary
 {
     internal static class ZLibCompression
     {
-        internal static byte[] Compress(byte[] inputBufffer)
+        internal static byte[] Compress(byte[] inputBuffer)
         {
-            int inputLength = inputBufffer.Length;
+            int inputLength = inputBuffer.Length;
 
             // create output memory stream to receive the compressed buffer
             var outputStream = new MemoryStream();
@@ -16,7 +16,7 @@ namespace QRCodeEncoderLibrary
             var deflateStream = new DeflateStream(outputStream, CompressionMode.Compress, true);
 
             // load input buffer into the compression class
-            deflateStream.Write(inputBufffer, 0, inputLength);
+            deflateStream.Write(inputBuffer, 0, inputLength);
 
             // compress, flush and close
 #if NETSTANDARD1_3

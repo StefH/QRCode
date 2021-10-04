@@ -4,7 +4,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>0.1.0</Version>
+    <Version>0.0.1</Version>
     <Authors>Uzi Granot;Stef Heyenrath</Authors>
     <PackageTags>QRCode, C#, Barcode, Encode, Decode, Fix, Repair</PackageTags>
     <PackageIcon>icon.png</PackageIcon>

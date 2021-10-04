@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.IO;
+using Stef.Validation;
 #if NET45
 using System.Drawing;
 using System.Drawing.Imaging;
 #endif
-using Stef.Validation;
 
 namespace QRCodeEncoderLibrary
 {
