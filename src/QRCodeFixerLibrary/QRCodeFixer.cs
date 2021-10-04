@@ -1,10 +1,8 @@
-﻿using System;
+using System;
 using System.Drawing;
 #if NET45_OR_GREATER
 using System.Drawing.Imaging;
 #endif
-using System.IO;
-using System.Text;
 using Microsoft.Extensions.Logging;
 using QRCodeDecoderLibrary;
 using QRCodeEncoderLibrary;
@@ -29,6 +27,8 @@ namespace QRCodeFixerLibrary
             Guard.NotNullOrEmpty(destinationFilename, nameof(destinationFilename));
             Guard.Condition(destinationFilename, f => destinationFilename.EndsWith(".png", StringComparison.OrdinalIgnoreCase), nameof(destinationFilename));
 
+            _logger.LogDebug("Trying to fix the QR Code in '{sourceFilename}' and save it as '{destinationFilename}'", sourceFilename, destinationFilename);
+
             var (encoder, data) = FixInternal(sourceFilename);
             encoder.SaveQRCodeToPngFile(destinationFilename);
 
@@ -40,6 +40,8 @@ namespace QRCodeFixerLibrary
         {
             Guard.NotNullOrEmpty(sourceFilename, nameof(sourceFilename));
             Guard.NotNullOrEmpty(destinationFilename, nameof(destinationFilename));
+
+            _logger.LogDebug("Trying to fix the QR Code in '{sourceFilename}' and save it as '{destinationFilename}'", sourceFilename, destinationFilename);
 
             var (encoder, data) = FixInternal(sourceFilename);
             encoder.SaveQRCodeToFile(destinationFilename, imageFormat);
@@ -59,7 +61,6 @@ namespace QRCodeFixerLibrary
             {
                 throw new ApplicationException();
             }
-
 
             var encoder = new QRCodeEncoder
             {
