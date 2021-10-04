@@ -7,6 +7,7 @@
         <LangVersion>9</LangVersion>
         <PackageId>QRCodeEncoder</PackageId>
         <PackageReadmeFile>QRCodeEncoder.PackageReadme.md</PackageReadmeFile>
+        <PackageLicenseUrl>https://www.codeproject.com/info/cpol10.aspx</PackageLicenseUrl>
     </PropertyGroup>
 
     <ItemGroup>
