@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net45;net461;netstandard2.0;netstandard2.1;net5.0</TargetFrameworks>
+    <Description>This QR Code library supports decoding a QR Code image.</Description>
+    <RootNamespace>QRCodeDecoderLibrary</RootNamespace>
+    <LangVersion>9</LangVersion>
+    <PackageId>QRCodeDecoder</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Stef.Validation" Version="0.0.3" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'netstandard2.1' or '$(TargetFramework)' == 'net5.0'">
+    <PackageReference Include="System.Drawing.Common" Version="4.5.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="1.1.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="1.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QRCodeSharedLibrary\QRCodeSharedLibrary.csproj" />
+  </ItemGroup>
+
+</Project>

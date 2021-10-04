@@ -13,13 +13,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeSharedLibrary.Net", "src\QRCodeSharedLibrary.Net\QRCodeSharedLibrary.Net.csproj", "{D74FE6C3-55F3-4857-BF87-580290F6375A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeSharedLibrary", "src\QRCodeSharedLibrary\QRCodeSharedLibrary.csproj", "{D74FE6C3-55F3-4857-BF87-580290F6375A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeEncoderLibrary.Net", "src\QRCodeEncoderLibrary.Net\QRCodeEncoderLibrary.Net.csproj", "{C4A05C67-7B00-4C92-9364-D4C17A9A30D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeEncoderLibrary", "src\QRCodeEncoderLibrary\QRCodeEncoderLibrary.csproj", "{C4A05C67-7B00-4C92-9364-D4C17A9A30D9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeDecoderLibrary.Net", "src\QRCodeDecoderLibrary.Net\QRCodeDecoderLibrary.Net.csproj", "{33C1C968-3E83-44F1-A243-2908D4E1221E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeDecoderLibrary", "src\QRCodeDecoderLibrary\QRCodeDecoderLibrary.csproj", "{33C1C968-3E83-44F1-A243-2908D4E1221E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeFixer.Net", "src\QRCodeFixer.Net\QRCodeFixer.Net.csproj", "{AB530C03-02BA-47A0-857B-AC45B900DC5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeFixerLibrary", "src\QRCodeFixerLibrary\QRCodeFixerLibrary.csproj", "{AB530C03-02BA-47A0-857B-AC45B900DC5F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRFixer", "examples\QRFixer\QRFixer.csproj", "{4189ECC6-647A-49D4-BEB9-3EDFB1D7CBD0}"
 EndProject
@@ -28,7 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReleaseNotes", "ReleaseNote
 		release\Generate-ReleaseNotes.bat = release\Generate-ReleaseNotes.bat
 		release\PackageReleaseNotes.template = release\PackageReleaseNotes.template
 		release\PackageReleaseNotes.txt = release\PackageReleaseNotes.txt
-		release\QRCodeFixer.Net.PackageReadme.md = release\QRCodeFixer.Net.PackageReadme.md
+		release\QRCodeFixer.PackageReadme.md = release\QRCodeFixer.PackageReadme.md
 		ReleaseNotes.md = ReleaseNotes.md
 	EndProjectSection
 EndProject

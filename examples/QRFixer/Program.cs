@@ -1,15 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using QRCodeDecoderLibrary;
-using QRCodeEncoderLibrary;
 using QRCodeFixerLibrary;
 
 Console.WindowWidth = 200;
 
 var services = new ServiceCollection();
-services.AddTransient<QRDecoder>();
-services.AddTransient<QRCodeEncoder>();
-services.AddTransient<QRCodeFixer>();
+services.AddQRCodeFixer();
 
 services.AddLogging(configure =>
 {
