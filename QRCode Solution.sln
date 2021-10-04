@@ -29,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReleaseNotes", "ReleaseNote
 		release\Generate-ReleaseNotes.bat = release\Generate-ReleaseNotes.bat
 		release\PackageReleaseNotes.template = release\PackageReleaseNotes.template
 		release\PackageReleaseNotes.txt = release\PackageReleaseNotes.txt
+		release\QRCodeDecoder.PackageReadme.md = release\QRCodeDecoder.PackageReadme.md
+		release\QRCodeEncoder.PackageReadme.md = release\QRCodeEncoder.PackageReadme.md
 		release\QRCodeFixer.PackageReadme.md = release\QRCodeFixer.PackageReadme.md
 		ReleaseNotes.md = ReleaseNotes.md
 	EndProjectSection

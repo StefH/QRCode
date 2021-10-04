@@ -1,39 +1,44 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>net45;netstandard1.3;netstandard2.0;netstandard2.1;net5.0</TargetFrameworks>
-    <Description>This QR Code library supports encoding a QR Code to an image.</Description>
-    <RootNamespace>QRCodeEncoderLibrary</RootNamespace>
-    <LangVersion>9</LangVersion>
-    <PackageId>QRCodeEncoder</PackageId>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFrameworks>net45;netstandard1.3;netstandard2.0;netstandard2.1;net5.0</TargetFrameworks>
+        <Description>This QR Code library supports encoding a a string to a QR Code image.</Description>
+        <RootNamespace>QRCodeEncoderLibrary</RootNamespace>
+        <LangVersion>9</LangVersion>
+        <PackageId>QRCodeEncoder</PackageId>
+        <PackageReadmeFile>QRCodeEncoder.PackageReadme.md</PackageReadmeFile>
+    </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.3'">
-    <!--<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="1.1.2" />-->
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="1.1.1" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Include="../../release/QRCodeEncoder.PackageReadme.md" Pack="true" PackagePath="" />
+    </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'netstandard2.1' or '$(TargetFramework)' == 'net5.0'">
-    <!--<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />-->
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
-  </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.3'">
+        <!--<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="1.1.2" />-->
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="1.1.1" />
+    </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
-    <!--<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />-->
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
-  </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'netstandard2.1' or '$(TargetFramework)' == 'net5.0'">
+        <!--<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />-->
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+    </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
-    <!--<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="1.1.2" />-->
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="1.1.1" />
-  </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
+        <!--<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />-->
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Stef.Validation" Version="0.0.3" />
-  </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+        <!--<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="1.1.2" />-->
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="1.1.1" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\QRCodeSharedLibrary\QRCodeSharedLibrary.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Stef.Validation" Version="0.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\QRCodeSharedLibrary\QRCodeSharedLibrary.csproj" />
+    </ItemGroup>
 
 </Project>
