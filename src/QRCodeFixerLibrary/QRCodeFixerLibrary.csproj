@@ -12,7 +12,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="../../release/QRCodeFixer.PackageReadme.md" Pack="true" PackagePath=""/>
+    <None Include="../../release/QRCodeFixer.PackageReadme.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45' or '$(TargetFramework)' == 'net461'">
+    <PackageReference Include="System.ValueTuple" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>

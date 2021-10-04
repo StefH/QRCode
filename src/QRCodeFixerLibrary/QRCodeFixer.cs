@@ -23,28 +23,32 @@ namespace QRCodeFixerLibrary
             _serviceProvider = Guard.NotNull(serviceProvider, nameof(serviceProvider));
         }
 
-        public void FixAndSaveAsPng(string sourceFilename, string destinationFilename)
+        public string FixAndSaveAsPng(string sourceFilename, string destinationFilename)
         {
             Guard.NotNullOrEmpty(sourceFilename, nameof(sourceFilename));
             Guard.NotNullOrEmpty(destinationFilename, nameof(destinationFilename));
             Guard.Condition(destinationFilename, f => destinationFilename.EndsWith(".png", StringComparison.OrdinalIgnoreCase), nameof(destinationFilename));
 
-            var encoder = FixInternal(sourceFilename);
+            var (encoder, data) = FixInternal(sourceFilename);
             encoder.SaveQRCodeToPngFile(destinationFilename);
+
+            return data;
         }
 
 #if NET45_OR_GREATER
-        public void FixAndSave(string sourceFilename, string destinationFilename, ImageFormat imageFormat)
+        public string FixAndSave(string sourceFilename, string destinationFilename, ImageFormat imageFormat)
         {
             Guard.NotNullOrEmpty(sourceFilename, nameof(sourceFilename));
             Guard.NotNullOrEmpty(destinationFilename, nameof(destinationFilename));
 
-            var encoder = FixInternal(sourceFilename);
+            var (encoder, data) = FixInternal(sourceFilename);
             encoder.SaveQRCodeToFile(destinationFilename, imageFormat);
+
+            return data;
         }
 
 #endif
-        private QRCodeEncoder FixInternal(string sourceFilename)
+        private (QRCodeEncoder encoder, string data) FixInternal(string sourceFilename)
         {
             var decoder = (QRDecoder)_serviceProvider.GetService(typeof(QRDecoder));
 
@@ -56,8 +60,6 @@ namespace QRCodeFixerLibrary
                 throw new ApplicationException();
             }
 
-            string text = QRDecoder.ByteArrayToString(data[0]);
-            _logger.LogInformation("Text = {0}", text);
 
             var encoder = new QRCodeEncoder
             {
@@ -66,7 +68,7 @@ namespace QRCodeFixerLibrary
 
             encoder.Encode(data);
 
-            return encoder;
+            return (encoder, QRDecoder.ByteArrayToString(data[0]));
         }
     }
 }

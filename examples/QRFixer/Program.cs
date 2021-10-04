@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using QRCodeFixerLibrary;
 
@@ -26,11 +27,12 @@ for (int i = 0; i < 4; i++)
 {
     var source = $"source-damaged-{i}.png";
     logger.LogWarning("Source filename '{0}'", source);
-    fixer.FixAndSaveAsPng(source, $"source-fixed-{i}.png");
+    var data = fixer.FixAndSaveAsPng(source, $"source-fixed-{i}.png");
+    logger.LogInformation(data);
 }
 
 logger.LogWarning("Source filename '{0}'", "source-damaged-skewing_and_noise.png");
-fixer.FixAndSaveAsPng("source-damaged-skewing_and_noise.png", "source-fixed-skewing_and_noise.png");
+logger.LogInformation(fixer.FixAndSaveAsPng("source-damaged-skewing_and_noise.png", "source-fixed-skewing_and_noise.png"));
 
 logger.LogWarning("Source filename '{0}'", "m-nl.png");
 fixer.FixAndSaveAsPng(@"c:\tmp\m-nl.png", @"c:\tmp\m-nl-fixed.png");
