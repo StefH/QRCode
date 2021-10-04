@@ -6,8 +6,8 @@ Sources copyright by Uzi Granot using [CPOL](https://www.codeproject.com/info/cp
 | Name | NuGet
 | - | - |
 | `QRCodeFixer` | [![NuGet Badge](https://buildstats.info/nuget/QRCodeFixer)](https://www.nuget.org/packages/QRCodeFixer)
-| `QRCodeEncoder` [![NuGet Badge](https://buildstats.info/nuget/QRCodeEncoder)](https://www.nuget.org/packages/QRCodeEncoder)
-| `QRCodeDecoder` [![NuGet Badge](https://buildstats.info/nuget/QRCodeDecoder)](https://www.nuget.org/packages/QRCodeDecoder)
+| `QRCodeEncoder` | [![NuGet Badge](https://buildstats.info/nuget/QRCodeEncoder)](https://www.nuget.org/packages/QRCodeEncoder)
+| `QRCodeDecoder` | [![NuGet Badge](https://buildstats.info/nuget/QRCodeDecoder)](https://www.nuget.org/packages/QRCodeDecoder)
 
 ## QRFixer
 Use this to fix a QR Code.
