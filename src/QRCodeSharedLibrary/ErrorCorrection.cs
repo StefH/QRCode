@@ -1,4 +1,4 @@
-﻿namespace QRCodeSharedLibrary.Net
+namespace QRCodeSharedLibrary
 {
     /// <summary>
     /// QR Code error correction code enumeration
@@ -23,6 +23,6 @@
         /// <summary>
         /// High (10)
         /// </summary>
-        H,
+        H
     }
 }

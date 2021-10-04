@@ -35,6 +35,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReleaseNotes", "ReleaseNote
 		ReleaseNotes.md = ReleaseNotes.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QRCodeDecoderDemo", "examples\QRCodeDecoderDemo\QRCodeDecoderDemo.csproj", "{0DC5EE49-E223-4337-8333-FE77F9657511}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QRCodeEncoderDemo", "examples\QRCodeEncoderDemo\QRCodeEncoderDemo.csproj", "{81041BF8-47F0-4F8B-8014-66C53739E948}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +65,14 @@ Global
 		{4189ECC6-647A-49D4-BEB9-3EDFB1D7CBD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4189ECC6-647A-49D4-BEB9-3EDFB1D7CBD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4189ECC6-647A-49D4-BEB9-3EDFB1D7CBD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DC5EE49-E223-4337-8333-FE77F9657511}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DC5EE49-E223-4337-8333-FE77F9657511}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DC5EE49-E223-4337-8333-FE77F9657511}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DC5EE49-E223-4337-8333-FE77F9657511}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81041BF8-47F0-4F8B-8014-66C53739E948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81041BF8-47F0-4F8B-8014-66C53739E948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81041BF8-47F0-4F8B-8014-66C53739E948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81041BF8-47F0-4F8B-8014-66C53739E948}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +84,8 @@ Global
 		{AB530C03-02BA-47A0-857B-AC45B900DC5F} = {EDDCBA37-7DB7-47DC-864C-7F5A75FFB142}
 		{4189ECC6-647A-49D4-BEB9-3EDFB1D7CBD0} = {D17985C3-46AA-479A-8830-D54F4E4335DD}
 		{75C52E84-CBFE-4A8B-959F-DA9489CA2C2E} = {C2375969-569E-45C6-AA10-6285A723A5CB}
+		{0DC5EE49-E223-4337-8333-FE77F9657511} = {D17985C3-46AA-479A-8830-D54F4E4335DD}
+		{81041BF8-47F0-4F8B-8014-66C53739E948} = {D17985C3-46AA-479A-8830-D54F4E4335DD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {31409F78-5D04-4D1F-B390-076530995DEA}

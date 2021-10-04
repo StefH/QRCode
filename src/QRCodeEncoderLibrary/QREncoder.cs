@@ -1,6 +1,6 @@
 using System;
 using System.Text;
-using QRCodeSharedLibrary.Net;
+using QRCodeSharedLibrary;
 using Stef.Validation;
 
 namespace QRCodeEncoderLibrary

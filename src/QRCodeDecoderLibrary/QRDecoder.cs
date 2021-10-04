@@ -5,7 +5,7 @@ using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Extensions.Logging;
-using QRCodeSharedLibrary.Net;
+using QRCodeSharedLibrary;
 using Stef.Validation;
 
 namespace QRCodeDecoderLibrary
@@ -1891,19 +1891,19 @@ namespace QRCodeDecoderLibrary
                 byte[] AlignPos = AlignmentPositionArray[QRCodeVersion];
                 int AlignmentDimension = AlignPos.Length;
                 for (int Row = 0; Row < AlignmentDimension; Row++) for (int Col = 0; Col < AlignmentDimension; Col++)
-                {
-                    if (Col == 0 && Row == 0 || Col == AlignmentDimension - 1 && Row == 0 || Col == 0 && Row == AlignmentDimension - 1)
                     {
-                        continue;
-                    }
+                        if (Col == 0 && Row == 0 || Col == AlignmentDimension - 1 && Row == 0 || Col == 0 && Row == AlignmentDimension - 1)
+                        {
+                            continue;
+                        }
 
-                    int PosRow = AlignPos[Row];
-                    int PosCol = AlignPos[Col];
-                    for (int ARow = -2; ARow < 3; ARow++) for (int ACol = -2; ACol < 3; ACol++)
-                    {
-                        BaseMatrix[PosRow + ARow, PosCol + ACol] = AlignmentPattern[ARow + 2, ACol + 2];
+                        int PosRow = AlignPos[Row];
+                        int PosCol = AlignPos[Col];
+                        for (int ARow = -2; ARow < 3; ARow++) for (int ACol = -2; ACol < 3; ACol++)
+                            {
+                                BaseMatrix[PosRow + ARow, PosCol + ACol] = AlignmentPattern[ARow + 2, ACol + 2];
+                            }
                     }
-                }
             }
 
             // reserve version information
@@ -1914,15 +1914,15 @@ namespace QRCodeDecoderLibrary
 
                 // top right
                 for (int Row = 0; Row < 6; Row++) for (int Col = 0; Col < 3; Col++)
-                {
-                    BaseMatrix[Row, Pos + Col] = FormatWhite;
-                }
+                    {
+                        BaseMatrix[Row, Pos + Col] = FormatWhite;
+                    }
 
                 // bottom right
                 for (int Col = 0; Col < 6; Col++) for (int Row = 0; Row < 3; Row++)
-                {
-                    BaseMatrix[Pos + Row, Col] = FormatWhite;
-                }
+                    {
+                        BaseMatrix[Pos + Row, Col] = FormatWhite;
+                    }
             }
         }
 
@@ -1975,10 +1975,10 @@ namespace QRCodeDecoderLibrary
         internal void ApplyMask0()
         {
             for (int Row = 0; Row < QRCodeDimension; Row += 2) for (int Col = 0; Col < QRCodeDimension; Col += 2)
-            {
-                if ((MaskMatrix[Row, Col] & NonData) == 0) MaskMatrix[Row, Col] ^= 1;
-                if ((MaskMatrix[Row + 1, Col + 1] & NonData) == 0) MaskMatrix[Row + 1, Col + 1] ^= 1;
-            }
+                {
+                    if ((MaskMatrix[Row, Col] & NonData) == 0) MaskMatrix[Row, Col] ^= 1;
+                    if ((MaskMatrix[Row + 1, Col + 1] & NonData) == 0) MaskMatrix[Row + 1, Col + 1] ^= 1;
+                }
         }
 
         ////////////////////////////////////////////////////////////////////
@@ -1988,7 +1988,7 @@ namespace QRCodeDecoderLibrary
         internal void ApplyMask1()
         {
             for (int Row = 0; Row < QRCodeDimension; Row += 2) for (int Col = 0; Col < QRCodeDimension; Col++)
-                if ((MaskMatrix[Row, Col] & NonData) == 0) MaskMatrix[Row, Col] ^= 1;
+                    if ((MaskMatrix[Row, Col] & NonData) == 0) MaskMatrix[Row, Col] ^= 1;
         }
 
         ////////////////////////////////////////////////////////////////////
@@ -1998,7 +1998,7 @@ namespace QRCodeDecoderLibrary
         internal void ApplyMask2()
         {
             for (int Row = 0; Row < QRCodeDimension; Row++) for (int Col = 0; Col < QRCodeDimension; Col += 3)
-               if ((MaskMatrix[Row, Col] & NonData) == 0) MaskMatrix[Row, Col] ^= 1;
+                    if ((MaskMatrix[Row, Col] & NonData) == 0) MaskMatrix[Row, Col] ^= 1;
         }
 
         ////////////////////////////////////////////////////////////////////
@@ -2008,11 +2008,11 @@ namespace QRCodeDecoderLibrary
         internal void ApplyMask3()
         {
             for (int Row = 0; Row < QRCodeDimension; Row += 3) for (int Col = 0; Col < QRCodeDimension; Col += 3)
-            {
-                if ((MaskMatrix[Row, Col] & NonData) == 0) MaskMatrix[Row, Col] ^= 1;
-                if ((MaskMatrix[Row + 1, Col + 2] & NonData) == 0) MaskMatrix[Row + 1, Col + 2] ^= 1;
-                if ((MaskMatrix[Row + 2, Col + 1] & NonData) == 0) MaskMatrix[Row + 2, Col + 1] ^= 1;
-            }
+                {
+                    if ((MaskMatrix[Row, Col] & NonData) == 0) MaskMatrix[Row, Col] ^= 1;
+                    if ((MaskMatrix[Row + 1, Col + 2] & NonData) == 0) MaskMatrix[Row + 1, Col + 2] ^= 1;
+                    if ((MaskMatrix[Row + 2, Col + 1] & NonData) == 0) MaskMatrix[Row + 2, Col + 1] ^= 1;
+                }
         }
 
         ////////////////////////////////////////////////////////////////////
@@ -2022,23 +2022,23 @@ namespace QRCodeDecoderLibrary
         internal void ApplyMask4()
         {
             for (int Row = 0; Row < QRCodeDimension; Row += 4) for (int Col = 0; Col < QRCodeDimension; Col += 6)
-            {
-                if ((MaskMatrix[Row, Col] & NonData) == 0) MaskMatrix[Row, Col] ^= 1;
-                if ((MaskMatrix[Row, Col + 1] & NonData) == 0) MaskMatrix[Row, Col + 1] ^= 1;
-                if ((MaskMatrix[Row, Col + 2] & NonData) == 0) MaskMatrix[Row, Col + 2] ^= 1;
+                {
+                    if ((MaskMatrix[Row, Col] & NonData) == 0) MaskMatrix[Row, Col] ^= 1;
+                    if ((MaskMatrix[Row, Col + 1] & NonData) == 0) MaskMatrix[Row, Col + 1] ^= 1;
+                    if ((MaskMatrix[Row, Col + 2] & NonData) == 0) MaskMatrix[Row, Col + 2] ^= 1;
 
-                if ((MaskMatrix[Row + 1, Col] & NonData) == 0) MaskMatrix[Row + 1, Col] ^= 1;
-                if ((MaskMatrix[Row + 1, Col + 1] & NonData) == 0) MaskMatrix[Row + 1, Col + 1] ^= 1;
-                if ((MaskMatrix[Row + 1, Col + 2] & NonData) == 0) MaskMatrix[Row + 1, Col + 2] ^= 1;
+                    if ((MaskMatrix[Row + 1, Col] & NonData) == 0) MaskMatrix[Row + 1, Col] ^= 1;
+                    if ((MaskMatrix[Row + 1, Col + 1] & NonData) == 0) MaskMatrix[Row + 1, Col + 1] ^= 1;
+                    if ((MaskMatrix[Row + 1, Col + 2] & NonData) == 0) MaskMatrix[Row + 1, Col + 2] ^= 1;
 
-                if ((MaskMatrix[Row + 2, Col + 3] & NonData) == 0) MaskMatrix[Row + 2, Col + 3] ^= 1;
-                if ((MaskMatrix[Row + 2, Col + 4] & NonData) == 0) MaskMatrix[Row + 2, Col + 4] ^= 1;
-                if ((MaskMatrix[Row + 2, Col + 5] & NonData) == 0) MaskMatrix[Row + 2, Col + 5] ^= 1;
+                    if ((MaskMatrix[Row + 2, Col + 3] & NonData) == 0) MaskMatrix[Row + 2, Col + 3] ^= 1;
+                    if ((MaskMatrix[Row + 2, Col + 4] & NonData) == 0) MaskMatrix[Row + 2, Col + 4] ^= 1;
+                    if ((MaskMatrix[Row + 2, Col + 5] & NonData) == 0) MaskMatrix[Row + 2, Col + 5] ^= 1;
 
-                if ((MaskMatrix[Row + 3, Col + 3] & NonData) == 0) MaskMatrix[Row + 3, Col + 3] ^= 1;
-                if ((MaskMatrix[Row + 3, Col + 4] & NonData) == 0) MaskMatrix[Row + 3, Col + 4] ^= 1;
-                if ((MaskMatrix[Row + 3, Col + 5] & NonData) == 0) MaskMatrix[Row + 3, Col + 5] ^= 1;
-            }
+                    if ((MaskMatrix[Row + 3, Col + 3] & NonData) == 0) MaskMatrix[Row + 3, Col + 3] ^= 1;
+                    if ((MaskMatrix[Row + 3, Col + 4] & NonData) == 0) MaskMatrix[Row + 3, Col + 4] ^= 1;
+                    if ((MaskMatrix[Row + 3, Col + 5] & NonData) == 0) MaskMatrix[Row + 3, Col + 5] ^= 1;
+                }
         }
 
         ////////////////////////////////////////////////////////////////////
@@ -2048,14 +2048,14 @@ namespace QRCodeDecoderLibrary
         internal void ApplyMask5()
         {
             for (int Row = 0; Row < QRCodeDimension; Row += 6) for (int Col = 0; Col < QRCodeDimension; Col += 6)
-            {
-                for (int Delta = 0; Delta < 6; Delta++) if ((MaskMatrix[Row, Col + Delta] & NonData) == 0) MaskMatrix[Row, Col + Delta] ^= 1;
-                for (int Delta = 1; Delta < 6; Delta++) if ((MaskMatrix[Row + Delta, Col] & NonData) == 0) MaskMatrix[Row + Delta, Col] ^= 1;
-                if ((MaskMatrix[Row + 2, Col + 3] & NonData) == 0) MaskMatrix[Row + 2, Col + 3] ^= 1;
-                if ((MaskMatrix[Row + 3, Col + 2] & NonData) == 0) MaskMatrix[Row + 3, Col + 2] ^= 1;
-                if ((MaskMatrix[Row + 3, Col + 4] & NonData) == 0) MaskMatrix[Row + 3, Col + 4] ^= 1;
-                if ((MaskMatrix[Row + 4, Col + 3] & NonData) == 0) MaskMatrix[Row + 4, Col + 3] ^= 1;
-            }
+                {
+                    for (int Delta = 0; Delta < 6; Delta++) if ((MaskMatrix[Row, Col + Delta] & NonData) == 0) MaskMatrix[Row, Col + Delta] ^= 1;
+                    for (int Delta = 1; Delta < 6; Delta++) if ((MaskMatrix[Row + Delta, Col] & NonData) == 0) MaskMatrix[Row + Delta, Col] ^= 1;
+                    if ((MaskMatrix[Row + 2, Col + 3] & NonData) == 0) MaskMatrix[Row + 2, Col + 3] ^= 1;
+                    if ((MaskMatrix[Row + 3, Col + 2] & NonData) == 0) MaskMatrix[Row + 3, Col + 2] ^= 1;
+                    if ((MaskMatrix[Row + 3, Col + 4] & NonData) == 0) MaskMatrix[Row + 3, Col + 4] ^= 1;
+                    if ((MaskMatrix[Row + 4, Col + 3] & NonData) == 0) MaskMatrix[Row + 4, Col + 3] ^= 1;
+                }
         }
 
         ////////////////////////////////////////////////////////////////////
@@ -2065,22 +2065,22 @@ namespace QRCodeDecoderLibrary
         internal void ApplyMask6()
         {
             for (int Row = 0; Row < QRCodeDimension; Row += 6) for (int Col = 0; Col < QRCodeDimension; Col += 6)
-            {
-                for (int Delta = 0; Delta < 6; Delta++) if ((MaskMatrix[Row, Col + Delta] & NonData) == 0) MaskMatrix[Row, Col + Delta] ^= 1;
-                for (int Delta = 1; Delta < 6; Delta++) if ((MaskMatrix[Row + Delta, Col] & NonData) == 0) MaskMatrix[Row + Delta, Col] ^= 1;
-                if ((MaskMatrix[Row + 1, Col + 1] & NonData) == 0) MaskMatrix[Row + 1, Col + 1] ^= 1;
-                if ((MaskMatrix[Row + 1, Col + 2] & NonData) == 0) MaskMatrix[Row + 1, Col + 2] ^= 1;
-                if ((MaskMatrix[Row + 2, Col + 1] & NonData) == 0) MaskMatrix[Row + 2, Col + 1] ^= 1;
-                if ((MaskMatrix[Row + 2, Col + 3] & NonData) == 0) MaskMatrix[Row + 2, Col + 3] ^= 1;
-                if ((MaskMatrix[Row + 2, Col + 4] & NonData) == 0) MaskMatrix[Row + 2, Col + 4] ^= 1;
-                if ((MaskMatrix[Row + 3, Col + 2] & NonData) == 0) MaskMatrix[Row + 3, Col + 2] ^= 1;
-                if ((MaskMatrix[Row + 3, Col + 4] & NonData) == 0) MaskMatrix[Row + 3, Col + 4] ^= 1;
-                if ((MaskMatrix[Row + 4, Col + 2] & NonData) == 0) MaskMatrix[Row + 4, Col + 2] ^= 1;
-                if ((MaskMatrix[Row + 4, Col + 3] & NonData) == 0) MaskMatrix[Row + 4, Col + 3] ^= 1;
-                if ((MaskMatrix[Row + 4, Col + 5] & NonData) == 0) MaskMatrix[Row + 4, Col + 5] ^= 1;
-                if ((MaskMatrix[Row + 5, Col + 4] & NonData) == 0) MaskMatrix[Row + 5, Col + 4] ^= 1;
-                if ((MaskMatrix[Row + 5, Col + 5] & NonData) == 0) MaskMatrix[Row + 5, Col + 5] ^= 1;
-            }
+                {
+                    for (int Delta = 0; Delta < 6; Delta++) if ((MaskMatrix[Row, Col + Delta] & NonData) == 0) MaskMatrix[Row, Col + Delta] ^= 1;
+                    for (int Delta = 1; Delta < 6; Delta++) if ((MaskMatrix[Row + Delta, Col] & NonData) == 0) MaskMatrix[Row + Delta, Col] ^= 1;
+                    if ((MaskMatrix[Row + 1, Col + 1] & NonData) == 0) MaskMatrix[Row + 1, Col + 1] ^= 1;
+                    if ((MaskMatrix[Row + 1, Col + 2] & NonData) == 0) MaskMatrix[Row + 1, Col + 2] ^= 1;
+                    if ((MaskMatrix[Row + 2, Col + 1] & NonData) == 0) MaskMatrix[Row + 2, Col + 1] ^= 1;
+                    if ((MaskMatrix[Row + 2, Col + 3] & NonData) == 0) MaskMatrix[Row + 2, Col + 3] ^= 1;
+                    if ((MaskMatrix[Row + 2, Col + 4] & NonData) == 0) MaskMatrix[Row + 2, Col + 4] ^= 1;
+                    if ((MaskMatrix[Row + 3, Col + 2] & NonData) == 0) MaskMatrix[Row + 3, Col + 2] ^= 1;
+                    if ((MaskMatrix[Row + 3, Col + 4] & NonData) == 0) MaskMatrix[Row + 3, Col + 4] ^= 1;
+                    if ((MaskMatrix[Row + 4, Col + 2] & NonData) == 0) MaskMatrix[Row + 4, Col + 2] ^= 1;
+                    if ((MaskMatrix[Row + 4, Col + 3] & NonData) == 0) MaskMatrix[Row + 4, Col + 3] ^= 1;
+                    if ((MaskMatrix[Row + 4, Col + 5] & NonData) == 0) MaskMatrix[Row + 4, Col + 5] ^= 1;
+                    if ((MaskMatrix[Row + 5, Col + 4] & NonData) == 0) MaskMatrix[Row + 5, Col + 4] ^= 1;
+                    if ((MaskMatrix[Row + 5, Col + 5] & NonData) == 0) MaskMatrix[Row + 5, Col + 5] ^= 1;
+                }
         }
 
         ////////////////////////////////////////////////////////////////////
@@ -2090,31 +2090,31 @@ namespace QRCodeDecoderLibrary
         private void ApplyMask7()
         {
             for (int Row = 0; Row < QRCodeDimension; Row += 6) for (int Col = 0; Col < QRCodeDimension; Col += 6)
-            {
-                if ((MaskMatrix[Row, Col] & NonData) == 0) MaskMatrix[Row, Col] ^= 1;
-                if ((MaskMatrix[Row, Col + 2] & NonData) == 0) MaskMatrix[Row, Col + 2] ^= 1;
-                if ((MaskMatrix[Row, Col + 4] & NonData) == 0) MaskMatrix[Row, Col + 4] ^= 1;
+                {
+                    if ((MaskMatrix[Row, Col] & NonData) == 0) MaskMatrix[Row, Col] ^= 1;
+                    if ((MaskMatrix[Row, Col + 2] & NonData) == 0) MaskMatrix[Row, Col + 2] ^= 1;
+                    if ((MaskMatrix[Row, Col + 4] & NonData) == 0) MaskMatrix[Row, Col + 4] ^= 1;
 
-                if ((MaskMatrix[Row + 1, Col + 3] & NonData) == 0) MaskMatrix[Row + 1, Col + 3] ^= 1;
-                if ((MaskMatrix[Row + 1, Col + 4] & NonData) == 0) MaskMatrix[Row + 1, Col + 4] ^= 1;
-                if ((MaskMatrix[Row + 1, Col + 5] & NonData) == 0) MaskMatrix[Row + 1, Col + 5] ^= 1;
+                    if ((MaskMatrix[Row + 1, Col + 3] & NonData) == 0) MaskMatrix[Row + 1, Col + 3] ^= 1;
+                    if ((MaskMatrix[Row + 1, Col + 4] & NonData) == 0) MaskMatrix[Row + 1, Col + 4] ^= 1;
+                    if ((MaskMatrix[Row + 1, Col + 5] & NonData) == 0) MaskMatrix[Row + 1, Col + 5] ^= 1;
 
-                if ((MaskMatrix[Row + 2, Col] & NonData) == 0) MaskMatrix[Row + 2, Col] ^= 1;
-                if ((MaskMatrix[Row + 2, Col + 4] & NonData) == 0) MaskMatrix[Row + 2, Col + 4] ^= 1;
-                if ((MaskMatrix[Row + 2, Col + 5] & NonData) == 0) MaskMatrix[Row + 2, Col + 5] ^= 1;
+                    if ((MaskMatrix[Row + 2, Col] & NonData) == 0) MaskMatrix[Row + 2, Col] ^= 1;
+                    if ((MaskMatrix[Row + 2, Col + 4] & NonData) == 0) MaskMatrix[Row + 2, Col + 4] ^= 1;
+                    if ((MaskMatrix[Row + 2, Col + 5] & NonData) == 0) MaskMatrix[Row + 2, Col + 5] ^= 1;
 
-                if ((MaskMatrix[Row + 3, Col + 1] & NonData) == 0) MaskMatrix[Row + 3, Col + 1] ^= 1;
-                if ((MaskMatrix[Row + 3, Col + 3] & NonData) == 0) MaskMatrix[Row + 3, Col + 3] ^= 1;
-                if ((MaskMatrix[Row + 3, Col + 5] & NonData) == 0) MaskMatrix[Row + 3, Col + 5] ^= 1;
+                    if ((MaskMatrix[Row + 3, Col + 1] & NonData) == 0) MaskMatrix[Row + 3, Col + 1] ^= 1;
+                    if ((MaskMatrix[Row + 3, Col + 3] & NonData) == 0) MaskMatrix[Row + 3, Col + 3] ^= 1;
+                    if ((MaskMatrix[Row + 3, Col + 5] & NonData) == 0) MaskMatrix[Row + 3, Col + 5] ^= 1;
 
-                if ((MaskMatrix[Row + 4, Col] & NonData) == 0) MaskMatrix[Row + 4, Col] ^= 1;
-                if ((MaskMatrix[Row + 4, Col + 1] & NonData) == 0) MaskMatrix[Row + 4, Col + 1] ^= 1;
-                if ((MaskMatrix[Row + 4, Col + 2] & NonData) == 0) MaskMatrix[Row + 4, Col + 2] ^= 1;
+                    if ((MaskMatrix[Row + 4, Col] & NonData) == 0) MaskMatrix[Row + 4, Col] ^= 1;
+                    if ((MaskMatrix[Row + 4, Col + 1] & NonData) == 0) MaskMatrix[Row + 4, Col + 1] ^= 1;
+                    if ((MaskMatrix[Row + 4, Col + 2] & NonData) == 0) MaskMatrix[Row + 4, Col + 2] ^= 1;
 
-                if ((MaskMatrix[Row + 5, Col + 1] & NonData) == 0) MaskMatrix[Row + 5, Col + 1] ^= 1;
-                if ((MaskMatrix[Row + 5, Col + 2] & NonData) == 0) MaskMatrix[Row + 5, Col + 2] ^= 1;
-                if ((MaskMatrix[Row + 5, Col + 3] & NonData) == 0) MaskMatrix[Row + 5, Col + 3] ^= 1;
-            }
-    }
+                    if ((MaskMatrix[Row + 5, Col + 1] & NonData) == 0) MaskMatrix[Row + 5, Col + 1] ^= 1;
+                    if ((MaskMatrix[Row + 5, Col + 2] & NonData) == 0) MaskMatrix[Row + 5, Col + 2] ^= 1;
+                    if ((MaskMatrix[Row + 5, Col + 3] & NonData) == 0) MaskMatrix[Row + 5, Col + 3] ^= 1;
+                }
+        }
     }
 }

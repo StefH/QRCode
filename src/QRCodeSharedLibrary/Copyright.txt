@@ -1,4 +1,4 @@
-﻿QR Code Library
+QR Code Library
 
 Author: Uzi Granot
 Original Version: 1.0
@@ -10,10 +10,12 @@ QR Code Library C# class library is free software.
 Software developed by this author is licensed under CPOL 1.02.
 Some portions of the QRCodeVideoDecoder are licensed under GNU Lesser General Public License v3.0.
 
-The solution is made of 3 projects:
-1. QRCodeDecoderLibrary.Net: QR code decoding.
-2. QRCodeEncodeLibrary.Net: QR code encoding.
+The solution is made of 5 projects:
+1. QRCodeDecoderLibrary: QR code decoding.
+2. QRCodeEncodeLibrary: QR code encoding.
 3. QRCodeSharedLibrary: Shared enums and types
+4. QRCodeEncoderDemo
+5. QRCodeDecoderDemo
 
 The main points of CPOL 1.02 subject to the terms of the License are:
 

@@ -1,4 +1,4 @@
-﻿namespace QRCodeSharedLibrary.Net
+namespace QRCodeSharedLibrary
 {
     /// <summary>
     /// QR Code encoding modes

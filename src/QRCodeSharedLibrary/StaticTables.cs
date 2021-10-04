@@ -1,4 +1,4 @@
-namespace QRCodeSharedLibrary.Net
+namespace QRCodeSharedLibrary
 {
     public abstract class StaticTables
     {

@@ -1,5 +1,5 @@
-﻿using System;
-using QRCodeSharedLibrary.Net;
+using System;
+using QRCodeSharedLibrary;
 
 namespace QRCodeDecoderLibrary
 {
