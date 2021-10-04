@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net45;netstandard1.0</TargetFrameworks>
+        <PackageId>QRCodeShared</PackageId>
+        <PackageLicenseUrl>https://www.codeproject.com/info/cpol10.aspx</PackageLicenseUrl>
+    </PropertyGroup>
+</Project>

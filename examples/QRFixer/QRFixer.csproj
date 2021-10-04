@@ -14,10 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\QRCodeDecoderLibrary.Net\QRCodeDecoderLibrary.Net.csproj" />
-    <ProjectReference Include="..\..\src\QRCodeEncoderLibrary.Net\QRCodeEncoderLibrary.Net.csproj" />
-    <ProjectReference Include="..\..\src\QRCodeFixer.Net\QRCodeFixer.Net.csproj" />
-    <ProjectReference Include="..\..\src\QRCodeSharedLibrary.Net\QRCodeSharedLibrary.Net.csproj" />
+    <ProjectReference Include="..\..\src\QRCodeDecoderLibrary\QRCodeDecoderLibrary.csproj" />
+    <ProjectReference Include="..\..\src\QRCodeEncoderLibrary\QRCodeEncoderLibrary.csproj" />
+    <ProjectReference Include="..\..\src\QRCodeFixerLibrary\QRCodeFixerLibrary.csproj" />
+    <ProjectReference Include="..\..\src\QRCodeSharedLibrary\QRCodeSharedLibrary.csproj" />
   </ItemGroup>
 
   <ItemGroup>

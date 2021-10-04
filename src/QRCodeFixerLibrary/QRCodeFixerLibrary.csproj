@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net45;net461;netstandard2.0;netstandard2.1;net5.0</TargetFrameworks>
+        <Authors>Stef Heyenrath</Authors>
+        <Copyright>Stef Heyenrath</Copyright>
+        <LangVersion>9</LangVersion>
+        <Nullable>enable</Nullable>
+        <Description>The QR Code Fixer library allows you to repair a damaged QR Code image.</Description>
+        <RootNamespace>QRCodeFixerLibrary</RootNamespace>
+        <PackageId>QRCodeFixer</PackageId>
+        <PackageReadmeFile>QRCodeFixer.PackageReadme.md</PackageReadmeFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../../release/QRCodeFixer.PackageReadme.md" Pack="true" PackagePath="" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(TargetFramework)' == 'net45' or '$(TargetFramework)' == 'net461'">
+        <PackageReference Include="System.ValueTuple" Version="4.3.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\QRCodeDecoderLibrary\QRCodeDecoderLibrary.csproj" />
+        <ProjectReference Include="..\QRCodeEncoderLibrary\QRCodeEncoderLibrary.csproj" />
+        <ProjectReference Include="..\QRCodeSharedLibrary\QRCodeSharedLibrary.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -9,17 +9,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{D1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C2375969-569E-45C6-AA10-6285A723A5CB}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		Directory.Build.props = Directory.Build.props
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeSharedLibrary.Net", "src\QRCodeSharedLibrary.Net\QRCodeSharedLibrary.Net.csproj", "{D74FE6C3-55F3-4857-BF87-580290F6375A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeSharedLibrary", "src\QRCodeSharedLibrary\QRCodeSharedLibrary.csproj", "{D74FE6C3-55F3-4857-BF87-580290F6375A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeEncoderLibrary.Net", "src\QRCodeEncoderLibrary.Net\QRCodeEncoderLibrary.Net.csproj", "{C4A05C67-7B00-4C92-9364-D4C17A9A30D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeEncoderLibrary", "src\QRCodeEncoderLibrary\QRCodeEncoderLibrary.csproj", "{C4A05C67-7B00-4C92-9364-D4C17A9A30D9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeDecoderLibrary.Net", "src\QRCodeDecoderLibrary.Net\QRCodeDecoderLibrary.Net.csproj", "{33C1C968-3E83-44F1-A243-2908D4E1221E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeDecoderLibrary", "src\QRCodeDecoderLibrary\QRCodeDecoderLibrary.csproj", "{33C1C968-3E83-44F1-A243-2908D4E1221E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeFixer.Net", "src\QRCodeFixer.Net\QRCodeFixer.Net.csproj", "{AB530C03-02BA-47A0-857B-AC45B900DC5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeFixerLibrary", "src\QRCodeFixerLibrary\QRCodeFixerLibrary.csproj", "{AB530C03-02BA-47A0-857B-AC45B900DC5F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRFixer", "examples\QRFixer\QRFixer.csproj", "{4189ECC6-647A-49D4-BEB9-3EDFB1D7CBD0}"
 EndProject
@@ -28,9 +29,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReleaseNotes", "ReleaseNote
 		release\Generate-ReleaseNotes.bat = release\Generate-ReleaseNotes.bat
 		release\PackageReleaseNotes.template = release\PackageReleaseNotes.template
 		release\PackageReleaseNotes.txt = release\PackageReleaseNotes.txt
-		release\QRCodeFixer.Net.PackageReadme.md = release\QRCodeFixer.Net.PackageReadme.md
+		release\QRCodeDecoder.PackageReadme.md = release\QRCodeDecoder.PackageReadme.md
+		release\QRCodeEncoder.PackageReadme.md = release\QRCodeEncoder.PackageReadme.md
+		release\QRCodeFixer.PackageReadme.md = release\QRCodeFixer.PackageReadme.md
 		ReleaseNotes.md = ReleaseNotes.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QRCodeDecoderDemo", "examples\QRCodeDecoderDemo\QRCodeDecoderDemo.csproj", "{0DC5EE49-E223-4337-8333-FE77F9657511}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QRCodeEncoderDemo", "examples\QRCodeEncoderDemo\QRCodeEncoderDemo.csproj", "{81041BF8-47F0-4F8B-8014-66C53739E948}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +65,14 @@ Global
 		{4189ECC6-647A-49D4-BEB9-3EDFB1D7CBD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4189ECC6-647A-49D4-BEB9-3EDFB1D7CBD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4189ECC6-647A-49D4-BEB9-3EDFB1D7CBD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DC5EE49-E223-4337-8333-FE77F9657511}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DC5EE49-E223-4337-8333-FE77F9657511}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DC5EE49-E223-4337-8333-FE77F9657511}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DC5EE49-E223-4337-8333-FE77F9657511}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81041BF8-47F0-4F8B-8014-66C53739E948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81041BF8-47F0-4F8B-8014-66C53739E948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81041BF8-47F0-4F8B-8014-66C53739E948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81041BF8-47F0-4F8B-8014-66C53739E948}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +84,8 @@ Global
 		{AB530C03-02BA-47A0-857B-AC45B900DC5F} = {EDDCBA37-7DB7-47DC-864C-7F5A75FFB142}
 		{4189ECC6-647A-49D4-BEB9-3EDFB1D7CBD0} = {D17985C3-46AA-479A-8830-D54F4E4335DD}
 		{75C52E84-CBFE-4A8B-959F-DA9489CA2C2E} = {C2375969-569E-45C6-AA10-6285A723A5CB}
+		{0DC5EE49-E223-4337-8333-FE77F9657511} = {D17985C3-46AA-479A-8830-D54F4E4335DD}
+		{81041BF8-47F0-4F8B-8014-66C53739E948} = {D17985C3-46AA-479A-8830-D54F4E4335DD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {31409F78-5D04-4D1F-B390-076530995DEA}

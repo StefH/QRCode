@@ -1,24 +1,25 @@
 <Project>
-  <PropertyGroup>
-    <MsBuildAllProjects>$(MsBuildAllProjects);$(MsBuildThisFileFullPath)</MsBuildAllProjects>
-  </PropertyGroup>
+    <PropertyGroup>
+        <MsBuildAllProjects>$(MsBuildAllProjects);$(MsBuildThisFileFullPath)</MsBuildAllProjects>
+    </PropertyGroup>
 
-  <PropertyGroup>
-    <Version>0.1.0</Version>
-    <Authors>Uzi Granot;Stef Heyenrath</Authors>
-    <PackageTags>QRCode, C#, Barcode, Encode, Decode, Fix, Repair</PackageTags>
-    <PackageIcon>icon.png</PackageIcon>
-    <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)/../../release/PackageReleaseNotes.txt"))</PackageReleaseNotes>
-    <PackageProjectUrl>https://github.com/StefH/QRCode</PackageProjectUrl>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/StefH/QRCode</RepositoryUrl>
-  </PropertyGroup>
+    <PropertyGroup>
+        <Version>0.0.1</Version>
+        <Authors>Uzi Granot;Stef Heyenrath</Authors>
+        <Copyright>Uzi Granot</Copyright>
+        <PackageTags>QRCode, C#, Barcode, Encode, Decode, Fix, Repair</PackageTags>
+        <PackageIcon>icon.png</PackageIcon>
+        <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)/../../release/PackageReleaseNotes.txt"))</PackageReleaseNotes>
+        <PackageProjectUrl>https://github.com/StefH/QRCode</PackageProjectUrl>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/StefH/QRCode</RepositoryUrl>
+    </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <None Include="../../resources/icon.png" Pack="true" PackagePath="" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Include="../../resources/icon.png" Pack="true" PackagePath="" />
+    </ItemGroup>
 </Project>
