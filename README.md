@@ -8,7 +8,7 @@ Use this to fix a QR Code.
 ![Damaged QRCode](https://github.com/StefH/QRCode/blob/main/examples/QRFixer/source-damaged-3.png)
 
 #### QR Code (fixed)
-![Fixed QRCode](https://github.com/StefH/QRCode/blob/main/examples/QRFixer/source-fixed-3a.png)
+![Fixed QRCode](https://github.com/StefH/QRCode/blob/main/examples/QRFixer/original.png)
 
 ### Configure Dependency Injection
 ``` csharp
