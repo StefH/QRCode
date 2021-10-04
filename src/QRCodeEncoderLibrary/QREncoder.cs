@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using QRCodeSharedLibrary.Net;
 using Stef.Validation;
@@ -1121,15 +1121,11 @@ namespace QRCodeEncoderLibrary
 
             // Error correction codewords per block
             ErrCorrCodewords = (MaxCodewords - MaxDataCodewords) / (BlocksGroup1 + BlocksGroup2);
-
-            // exit
-            return;
         }
 
         ////////////////////////////////////////////////////////////////////
         // Build Base Matrix
         ////////////////////////////////////////////////////////////////////
-
         internal void BuildBaseMatrix()
         {
             // allocate base matrix
@@ -1185,11 +1181,7 @@ namespace QRCodeEncoderLibrary
         ////////////////////////////////////////////////////////////////////
         // Apply Mask
         ////////////////////////////////////////////////////////////////////
-
-        internal void ApplyMask
-                (
-                int Mask
-                )
+        internal void ApplyMask(int Mask)
         {
             MaskMatrix = (byte[,])BaseMatrix.Clone();
             switch (Mask)

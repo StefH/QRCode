@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -10,7 +10,7 @@ using Stef.Validation;
 
 namespace QRCodeDecoderLibrary
 {
-    public class QRDecoder
+    public class QRDecoder : StaticTables
 
     {
         /// <summary>
@@ -1211,7 +1211,7 @@ namespace QRCodeDecoderLibrary
             int Code = VersionCode >> 12;
 
             // test for exact match
-            if (Code >= 7 && Code <= 40 && StaticTables.VersionCodeArray[Code - 7] == VersionCode)
+            if (Code >= 7 && Code <= 40 && VersionCodeArray[Code - 7] == VersionCode)
             {
 
                 _logger.LogDebug("Version code exact match: {0:X4}, Version: {1}", VersionCode, Code);
@@ -1225,7 +1225,7 @@ namespace QRCodeDecoderLibrary
             for (int Index = 0; Index < 34; Index++)
             {
                 // test for exact match
-                int ErrorBits = StaticTables.VersionCodeArray[Index] ^ VersionCode;
+                int ErrorBits = VersionCodeArray[Index] ^ VersionCode;
                 if (ErrorBits == 0) return VersionCode >> 12;
 
                 // count errors
@@ -1259,7 +1259,7 @@ namespace QRCodeDecoderLibrary
             int Info = 0;
             for (int Index = 0; Index < 15; Index++)
             {
-                if (GetModule(StaticTables.FormatInfoOne[Index, 0], StaticTables.FormatInfoOne[Index, 1])) Info |= 1 << Index;
+                if (GetModule(FormatInfoOne[Index, 0], FormatInfoOne[Index, 1])) Info |= 1 << Index;
             }
             return TestFormatInfo(Info);
         }
@@ -1273,9 +1273,9 @@ namespace QRCodeDecoderLibrary
             int Info = 0;
             for (int Index = 0; Index < 15; Index++)
             {
-                int Row = StaticTables.FormatInfoTwo[Index, 0];
+                int Row = FormatInfoTwo[Index, 0];
                 if (Row < 0) Row += QRCodeDimension;
-                int Col = StaticTables.FormatInfoTwo[Index, 1];
+                int Col = FormatInfoTwo[Index, 1];
                 if (Col < 0) Col += QRCodeDimension;
                 if (GetModule(Row, Col)) Info |= 1 << Index;
             }
@@ -1295,7 +1295,7 @@ namespace QRCodeDecoderLibrary
             int Info = (FormatInfo ^ 0x5412) >> 10;
 
             // test for exact match
-            if (StaticTables.FormatInfoArray[Info] == FormatInfo)
+            if (FormatInfoArray[Info] == FormatInfo)
             {
 
                 _logger.LogDebug("Format info exact match: {0:X4}, EC: {1}, mask: {2}",
@@ -1309,7 +1309,7 @@ namespace QRCodeDecoderLibrary
             int Error = int.MaxValue;
             for (int Index = 0; Index < 32; Index++)
             {
-                int ErrorCount = CountBits(StaticTables.FormatInfoArray[Index] ^ FormatInfo);
+                int ErrorCount = CountBits(FormatInfoArray[Index] ^ FormatInfo);
                 if (ErrorCount < Error)
                 {
                     Error = ErrorCount;
@@ -1354,9 +1354,9 @@ namespace QRCodeDecoderLibrary
             for (int Row = 0; Row < QRCodeDimension; Row++) for (int Col = 0; Col < QRCodeDimension; Col++)
                 {
                     // the module (Row, Col) is not a fixed module 
-                    if ((BaseMatrix[Row, Col] & StaticTables.Fixed) == 0)
+                    if ((BaseMatrix[Row, Col] & Fixed) == 0)
                     {
-                        if (GetModule(Row, Col)) BaseMatrix[Row, Col] |= StaticTables.Black;
+                        if (GetModule(Row, Col)) BaseMatrix[Row, Col] |= Black;
                     }
 
                     // fixed module
@@ -1366,7 +1366,7 @@ namespace QRCodeDecoderLibrary
                         FixedCount++;
 
                         // test for error
-                        if ((GetModule(Row, Col) ? StaticTables.Black : StaticTables.White) != (BaseMatrix[Row, Col] & 1)) ErrorCount++;
+                        if ((GetModule(Row, Col) ? Black : White) != (BaseMatrix[Row, Col] & 1)) ErrorCount++;
                     }
                 }
 
@@ -1409,7 +1409,7 @@ namespace QRCodeDecoderLibrary
             for (; ; )
             {
                 // current module is data
-                if ((MaskMatrix[Row, Col] & StaticTables.NonData) == 0)
+                if ((MaskMatrix[Row, Col] & NonData) == 0)
                 {
                     // unload current module with
                     if ((MaskMatrix[Row, Col] & 1) != 0) CodewordsArray[Ptr >> 3] |= (byte)(1 << (7 - (Ptr & 7)));
@@ -1546,7 +1546,7 @@ namespace QRCodeDecoderLibrary
             int TotalErrorCount = 0;
 
             // set generator polynomial array
-            byte[] Generator = StaticTables.GenArray[ErrCorrCodewords - 7];
+            byte[] Generator = GenArray[ErrCorrCodewords - 7];
 
             // error correcion calculation buffer
             int BufSize = Math.Max(DataCodewordsGroup1, DataCodewordsGroup2) + ErrCorrCodewords;
@@ -1696,9 +1696,9 @@ namespace QRCodeDecoderLibrary
                             {
                                 throw new ApplicationException("Premature end of data (Numeric 1)");
                             }
-                            DataSeg.Add(StaticTables.DecodingTable[Temp / 100]);
-                            DataSeg.Add(StaticTables.DecodingTable[(Temp % 100) / 10]);
-                            DataSeg.Add(StaticTables.DecodingTable[Temp % 10]);
+                            DataSeg.Add(DecodingTable[Temp / 100]);
+                            DataSeg.Add(DecodingTable[(Temp % 100) / 10]);
+                            DataSeg.Add(DecodingTable[Temp % 10]);
                         }
 
                         // we have one character remaining
@@ -1709,7 +1709,7 @@ namespace QRCodeDecoderLibrary
                             {
                                 throw new ApplicationException("Premature end of data (Numeric 2)");
                             }
-                            DataSeg.Add(StaticTables.DecodingTable[Temp]);
+                            DataSeg.Add(DecodingTable[Temp]);
                         }
 
                         // we have two character remaining
@@ -1720,8 +1720,8 @@ namespace QRCodeDecoderLibrary
                             {
                                 throw new ApplicationException("Premature end of data (Numeric 3)");
                             }
-                            DataSeg.Add(StaticTables.DecodingTable[Temp / 10]);
-                            DataSeg.Add(StaticTables.DecodingTable[Temp % 10]);
+                            DataSeg.Add(DecodingTable[Temp / 10]);
+                            DataSeg.Add(DecodingTable[Temp % 10]);
                         }
                         break;
 
@@ -1736,8 +1736,8 @@ namespace QRCodeDecoderLibrary
                             {
                                 throw new ApplicationException("Premature end of data (Alpha Numeric 1)");
                             }
-                            DataSeg.Add(StaticTables.DecodingTable[Temp / 45]);
-                            DataSeg.Add(StaticTables.DecodingTable[Temp % 45]);
+                            DataSeg.Add(DecodingTable[Temp / 45]);
+                            DataSeg.Add(DecodingTable[Temp % 45]);
                         }
 
                         // we have one character remaining
@@ -1748,7 +1748,7 @@ namespace QRCodeDecoderLibrary
                             {
                                 throw new ApplicationException("Premature end of data (Alpha Numeric 2)");
                             }
-                            DataSeg.Add(StaticTables.DecodingTable[Temp]);
+                            DataSeg.Add(DecodingTable[Temp]);
                         }
                         break;
 
@@ -1833,23 +1833,23 @@ namespace QRCodeDecoderLibrary
             int BlockInfoIndex = (QRCodeVersion - 1) * 4 + (int)ErrorCorrection;
 
             // Number of blocks in group 1
-            BlocksGroup1 = StaticTables.ECBlockInfo[BlockInfoIndex, StaticTables.BLOCKS_GROUP1];
+            BlocksGroup1 = ECBlockInfo[BlockInfoIndex, BLOCKS_GROUP1];
 
             // Number of data codewords in blocks of group 1
-            DataCodewordsGroup1 = StaticTables.ECBlockInfo[BlockInfoIndex, StaticTables.DATA_CODEWORDS_GROUP1];
+            DataCodewordsGroup1 = ECBlockInfo[BlockInfoIndex, DATA_CODEWORDS_GROUP1];
 
             // Number of blocks in group 2
-            BlocksGroup2 = StaticTables.ECBlockInfo[BlockInfoIndex, StaticTables.BLOCKS_GROUP2];
+            BlocksGroup2 = ECBlockInfo[BlockInfoIndex, BLOCKS_GROUP2];
 
             // Number of data codewords in blocks of group 2
-            DataCodewordsGroup2 = StaticTables.ECBlockInfo[BlockInfoIndex, StaticTables.DATA_CODEWORDS_GROUP2];
+            DataCodewordsGroup2 = ECBlockInfo[BlockInfoIndex, DATA_CODEWORDS_GROUP2];
 
             // Total number of data codewords for this version and EC level
             MaxDataCodewords = BlocksGroup1 * DataCodewordsGroup1 + BlocksGroup2 * DataCodewordsGroup2;
             MaxDataBits = 8 * MaxDataCodewords;
 
             // total data plus error correction bits
-            MaxCodewords = StaticTables.MaxCodewordsArray[QRCodeVersion];
+            MaxCodewords = MaxCodewordsArray[QRCodeVersion];
 
             // Error correction codewords per block
             ErrCorrCodewords = (MaxCodewords - MaxDataCodewords) / (BlocksGroup1 + BlocksGroup2);
@@ -1873,22 +1873,22 @@ namespace QRCodeDecoderLibrary
             BaseMatrix = new byte[QRCodeDimension + 5, QRCodeDimension + 5];
 
             // top left finder patterns
-            for (int Row = 0; Row < 9; Row++) for (int Col = 0; Col < 9; Col++) BaseMatrix[Row, Col] = StaticTables.FinderPatternTopLeft[Row, Col];
+            for (int Row = 0; Row < 9; Row++) for (int Col = 0; Col < 9; Col++) BaseMatrix[Row, Col] = FinderPatternTopLeft[Row, Col];
 
             // top right finder patterns
             int Pos = QRCodeDimension - 8;
-            for (int Row = 0; Row < 9; Row++) for (int Col = 0; Col < 8; Col++) BaseMatrix[Row, Pos + Col] = StaticTables.FinderPatternTopRight[Row, Col];
+            for (int Row = 0; Row < 9; Row++) for (int Col = 0; Col < 8; Col++) BaseMatrix[Row, Pos + Col] = FinderPatternTopRight[Row, Col];
 
             // bottom left finder patterns
-            for (int Row = 0; Row < 8; Row++) for (int Col = 0; Col < 9; Col++) BaseMatrix[Pos + Row, Col] = StaticTables.FinderPatternBottomLeft[Row, Col];
+            for (int Row = 0; Row < 8; Row++) for (int Col = 0; Col < 9; Col++) BaseMatrix[Pos + Row, Col] = FinderPatternBottomLeft[Row, Col];
 
             // Timing pattern
-            for (int Z = 8; Z < QRCodeDimension - 8; Z++) BaseMatrix[Z, 6] = BaseMatrix[6, Z] = (Z & 1) == 0 ? StaticTables.FixedBlack : StaticTables.FixedWhite;
+            for (int Z = 8; Z < QRCodeDimension - 8; Z++) BaseMatrix[Z, 6] = BaseMatrix[6, Z] = (Z & 1) == 0 ? FixedBlack : FixedWhite;
 
             // alignment pattern
             if (QRCodeVersion > 1)
             {
-                byte[] AlignPos = StaticTables.AlignmentPositionArray[QRCodeVersion];
+                byte[] AlignPos = AlignmentPositionArray[QRCodeVersion];
                 int AlignmentDimension = AlignPos.Length;
                 for (int Row = 0; Row < AlignmentDimension; Row++) for (int Col = 0; Col < AlignmentDimension; Col++)
                 {
@@ -1901,7 +1901,7 @@ namespace QRCodeDecoderLibrary
                     int PosCol = AlignPos[Col];
                     for (int ARow = -2; ARow < 3; ARow++) for (int ACol = -2; ACol < 3; ACol++)
                     {
-                        BaseMatrix[PosRow + ARow, PosCol + ACol] = StaticTables.AlignmentPattern[ARow + 2, ACol + 2];
+                        BaseMatrix[PosRow + ARow, PosCol + ACol] = AlignmentPattern[ARow + 2, ACol + 2];
                     }
                 }
             }
@@ -1915,13 +1915,13 @@ namespace QRCodeDecoderLibrary
                 // top right
                 for (int Row = 0; Row < 6; Row++) for (int Col = 0; Col < 3; Col++)
                 {
-                    BaseMatrix[Row, Pos + Col] = StaticTables.FormatWhite;
+                    BaseMatrix[Row, Pos + Col] = FormatWhite;
                 }
 
                 // bottom right
                 for (int Col = 0; Col < 6; Col++) for (int Row = 0; Row < 3; Row++)
                 {
-                    BaseMatrix[Pos + Row, Col] = StaticTables.FormatWhite;
+                    BaseMatrix[Pos + Row, Col] = FormatWhite;
                 }
             }
         }
@@ -1976,8 +1976,8 @@ namespace QRCodeDecoderLibrary
         {
             for (int Row = 0; Row < QRCodeDimension; Row += 2) for (int Col = 0; Col < QRCodeDimension; Col += 2)
             {
-                if ((MaskMatrix[Row, Col] & StaticTables.NonData) == 0) MaskMatrix[Row, Col] ^= 1;
-                if ((MaskMatrix[Row + 1, Col + 1] & StaticTables.NonData) == 0) MaskMatrix[Row + 1, Col + 1] ^= 1;
+                if ((MaskMatrix[Row, Col] & NonData) == 0) MaskMatrix[Row, Col] ^= 1;
+                if ((MaskMatrix[Row + 1, Col + 1] & NonData) == 0) MaskMatrix[Row + 1, Col + 1] ^= 1;
             }
         }
 
@@ -1988,7 +1988,7 @@ namespace QRCodeDecoderLibrary
         internal void ApplyMask1()
         {
             for (int Row = 0; Row < QRCodeDimension; Row += 2) for (int Col = 0; Col < QRCodeDimension; Col++)
-                if ((MaskMatrix[Row, Col] & StaticTables.NonData) == 0) MaskMatrix[Row, Col] ^= 1;
+                if ((MaskMatrix[Row, Col] & NonData) == 0) MaskMatrix[Row, Col] ^= 1;
         }
 
         ////////////////////////////////////////////////////////////////////
@@ -1998,7 +1998,7 @@ namespace QRCodeDecoderLibrary
         internal void ApplyMask2()
         {
             for (int Row = 0; Row < QRCodeDimension; Row++) for (int Col = 0; Col < QRCodeDimension; Col += 3)
-               if ((MaskMatrix[Row, Col] & StaticTables.NonData) == 0) MaskMatrix[Row, Col] ^= 1;
+               if ((MaskMatrix[Row, Col] & NonData) == 0) MaskMatrix[Row, Col] ^= 1;
         }
 
         ////////////////////////////////////////////////////////////////////
@@ -2009,9 +2009,9 @@ namespace QRCodeDecoderLibrary
         {
             for (int Row = 0; Row < QRCodeDimension; Row += 3) for (int Col = 0; Col < QRCodeDimension; Col += 3)
             {
-                if ((MaskMatrix[Row, Col] & StaticTables.NonData) == 0) MaskMatrix[Row, Col] ^= 1;
-                if ((MaskMatrix[Row + 1, Col + 2] & StaticTables.NonData) == 0) MaskMatrix[Row + 1, Col + 2] ^= 1;
-                if ((MaskMatrix[Row + 2, Col + 1] & StaticTables.NonData) == 0) MaskMatrix[Row + 2, Col + 1] ^= 1;
+                if ((MaskMatrix[Row, Col] & NonData) == 0) MaskMatrix[Row, Col] ^= 1;
+                if ((MaskMatrix[Row + 1, Col + 2] & NonData) == 0) MaskMatrix[Row + 1, Col + 2] ^= 1;
+                if ((MaskMatrix[Row + 2, Col + 1] & NonData) == 0) MaskMatrix[Row + 2, Col + 1] ^= 1;
             }
         }
 
@@ -2023,21 +2023,21 @@ namespace QRCodeDecoderLibrary
         {
             for (int Row = 0; Row < QRCodeDimension; Row += 4) for (int Col = 0; Col < QRCodeDimension; Col += 6)
             {
-                if ((MaskMatrix[Row, Col] & StaticTables.NonData) == 0) MaskMatrix[Row, Col] ^= 1;
-                if ((MaskMatrix[Row, Col + 1] & StaticTables.NonData) == 0) MaskMatrix[Row, Col + 1] ^= 1;
-                if ((MaskMatrix[Row, Col + 2] & StaticTables.NonData) == 0) MaskMatrix[Row, Col + 2] ^= 1;
+                if ((MaskMatrix[Row, Col] & NonData) == 0) MaskMatrix[Row, Col] ^= 1;
+                if ((MaskMatrix[Row, Col + 1] & NonData) == 0) MaskMatrix[Row, Col + 1] ^= 1;
+                if ((MaskMatrix[Row, Col + 2] & NonData) == 0) MaskMatrix[Row, Col + 2] ^= 1;
 
-                if ((MaskMatrix[Row + 1, Col] & StaticTables.NonData) == 0) MaskMatrix[Row + 1, Col] ^= 1;
-                if ((MaskMatrix[Row + 1, Col + 1] & StaticTables.NonData) == 0) MaskMatrix[Row + 1, Col + 1] ^= 1;
-                if ((MaskMatrix[Row + 1, Col + 2] & StaticTables.NonData) == 0) MaskMatrix[Row + 1, Col + 2] ^= 1;
+                if ((MaskMatrix[Row + 1, Col] & NonData) == 0) MaskMatrix[Row + 1, Col] ^= 1;
+                if ((MaskMatrix[Row + 1, Col + 1] & NonData) == 0) MaskMatrix[Row + 1, Col + 1] ^= 1;
+                if ((MaskMatrix[Row + 1, Col + 2] & NonData) == 0) MaskMatrix[Row + 1, Col + 2] ^= 1;
 
-                if ((MaskMatrix[Row + 2, Col + 3] & StaticTables.NonData) == 0) MaskMatrix[Row + 2, Col + 3] ^= 1;
-                if ((MaskMatrix[Row + 2, Col + 4] & StaticTables.NonData) == 0) MaskMatrix[Row + 2, Col + 4] ^= 1;
-                if ((MaskMatrix[Row + 2, Col + 5] & StaticTables.NonData) == 0) MaskMatrix[Row + 2, Col + 5] ^= 1;
+                if ((MaskMatrix[Row + 2, Col + 3] & NonData) == 0) MaskMatrix[Row + 2, Col + 3] ^= 1;
+                if ((MaskMatrix[Row + 2, Col + 4] & NonData) == 0) MaskMatrix[Row + 2, Col + 4] ^= 1;
+                if ((MaskMatrix[Row + 2, Col + 5] & NonData) == 0) MaskMatrix[Row + 2, Col + 5] ^= 1;
 
-                if ((MaskMatrix[Row + 3, Col + 3] & StaticTables.NonData) == 0) MaskMatrix[Row + 3, Col + 3] ^= 1;
-                if ((MaskMatrix[Row + 3, Col + 4] & StaticTables.NonData) == 0) MaskMatrix[Row + 3, Col + 4] ^= 1;
-                if ((MaskMatrix[Row + 3, Col + 5] & StaticTables.NonData) == 0) MaskMatrix[Row + 3, Col + 5] ^= 1;
+                if ((MaskMatrix[Row + 3, Col + 3] & NonData) == 0) MaskMatrix[Row + 3, Col + 3] ^= 1;
+                if ((MaskMatrix[Row + 3, Col + 4] & NonData) == 0) MaskMatrix[Row + 3, Col + 4] ^= 1;
+                if ((MaskMatrix[Row + 3, Col + 5] & NonData) == 0) MaskMatrix[Row + 3, Col + 5] ^= 1;
             }
         }
 
@@ -2049,12 +2049,12 @@ namespace QRCodeDecoderLibrary
         {
             for (int Row = 0; Row < QRCodeDimension; Row += 6) for (int Col = 0; Col < QRCodeDimension; Col += 6)
             {
-                for (int Delta = 0; Delta < 6; Delta++) if ((MaskMatrix[Row, Col + Delta] & StaticTables.NonData) == 0) MaskMatrix[Row, Col + Delta] ^= 1;
-                for (int Delta = 1; Delta < 6; Delta++) if ((MaskMatrix[Row + Delta, Col] & StaticTables.NonData) == 0) MaskMatrix[Row + Delta, Col] ^= 1;
-                if ((MaskMatrix[Row + 2, Col + 3] & StaticTables.NonData) == 0) MaskMatrix[Row + 2, Col + 3] ^= 1;
-                if ((MaskMatrix[Row + 3, Col + 2] & StaticTables.NonData) == 0) MaskMatrix[Row + 3, Col + 2] ^= 1;
-                if ((MaskMatrix[Row + 3, Col + 4] & StaticTables.NonData) == 0) MaskMatrix[Row + 3, Col + 4] ^= 1;
-                if ((MaskMatrix[Row + 4, Col + 3] & StaticTables.NonData) == 0) MaskMatrix[Row + 4, Col + 3] ^= 1;
+                for (int Delta = 0; Delta < 6; Delta++) if ((MaskMatrix[Row, Col + Delta] & NonData) == 0) MaskMatrix[Row, Col + Delta] ^= 1;
+                for (int Delta = 1; Delta < 6; Delta++) if ((MaskMatrix[Row + Delta, Col] & NonData) == 0) MaskMatrix[Row + Delta, Col] ^= 1;
+                if ((MaskMatrix[Row + 2, Col + 3] & NonData) == 0) MaskMatrix[Row + 2, Col + 3] ^= 1;
+                if ((MaskMatrix[Row + 3, Col + 2] & NonData) == 0) MaskMatrix[Row + 3, Col + 2] ^= 1;
+                if ((MaskMatrix[Row + 3, Col + 4] & NonData) == 0) MaskMatrix[Row + 3, Col + 4] ^= 1;
+                if ((MaskMatrix[Row + 4, Col + 3] & NonData) == 0) MaskMatrix[Row + 4, Col + 3] ^= 1;
             }
         }
 
@@ -2066,20 +2066,20 @@ namespace QRCodeDecoderLibrary
         {
             for (int Row = 0; Row < QRCodeDimension; Row += 6) for (int Col = 0; Col < QRCodeDimension; Col += 6)
             {
-                for (int Delta = 0; Delta < 6; Delta++) if ((MaskMatrix[Row, Col + Delta] & StaticTables.NonData) == 0) MaskMatrix[Row, Col + Delta] ^= 1;
-                for (int Delta = 1; Delta < 6; Delta++) if ((MaskMatrix[Row + Delta, Col] & StaticTables.NonData) == 0) MaskMatrix[Row + Delta, Col] ^= 1;
-                if ((MaskMatrix[Row + 1, Col + 1] & StaticTables.NonData) == 0) MaskMatrix[Row + 1, Col + 1] ^= 1;
-                if ((MaskMatrix[Row + 1, Col + 2] & StaticTables.NonData) == 0) MaskMatrix[Row + 1, Col + 2] ^= 1;
-                if ((MaskMatrix[Row + 2, Col + 1] & StaticTables.NonData) == 0) MaskMatrix[Row + 2, Col + 1] ^= 1;
-                if ((MaskMatrix[Row + 2, Col + 3] & StaticTables.NonData) == 0) MaskMatrix[Row + 2, Col + 3] ^= 1;
-                if ((MaskMatrix[Row + 2, Col + 4] & StaticTables.NonData) == 0) MaskMatrix[Row + 2, Col + 4] ^= 1;
-                if ((MaskMatrix[Row + 3, Col + 2] & StaticTables.NonData) == 0) MaskMatrix[Row + 3, Col + 2] ^= 1;
-                if ((MaskMatrix[Row + 3, Col + 4] & StaticTables.NonData) == 0) MaskMatrix[Row + 3, Col + 4] ^= 1;
-                if ((MaskMatrix[Row + 4, Col + 2] & StaticTables.NonData) == 0) MaskMatrix[Row + 4, Col + 2] ^= 1;
-                if ((MaskMatrix[Row + 4, Col + 3] & StaticTables.NonData) == 0) MaskMatrix[Row + 4, Col + 3] ^= 1;
-                if ((MaskMatrix[Row + 4, Col + 5] & StaticTables.NonData) == 0) MaskMatrix[Row + 4, Col + 5] ^= 1;
-                if ((MaskMatrix[Row + 5, Col + 4] & StaticTables.NonData) == 0) MaskMatrix[Row + 5, Col + 4] ^= 1;
-                if ((MaskMatrix[Row + 5, Col + 5] & StaticTables.NonData) == 0) MaskMatrix[Row + 5, Col + 5] ^= 1;
+                for (int Delta = 0; Delta < 6; Delta++) if ((MaskMatrix[Row, Col + Delta] & NonData) == 0) MaskMatrix[Row, Col + Delta] ^= 1;
+                for (int Delta = 1; Delta < 6; Delta++) if ((MaskMatrix[Row + Delta, Col] & NonData) == 0) MaskMatrix[Row + Delta, Col] ^= 1;
+                if ((MaskMatrix[Row + 1, Col + 1] & NonData) == 0) MaskMatrix[Row + 1, Col + 1] ^= 1;
+                if ((MaskMatrix[Row + 1, Col + 2] & NonData) == 0) MaskMatrix[Row + 1, Col + 2] ^= 1;
+                if ((MaskMatrix[Row + 2, Col + 1] & NonData) == 0) MaskMatrix[Row + 2, Col + 1] ^= 1;
+                if ((MaskMatrix[Row + 2, Col + 3] & NonData) == 0) MaskMatrix[Row + 2, Col + 3] ^= 1;
+                if ((MaskMatrix[Row + 2, Col + 4] & NonData) == 0) MaskMatrix[Row + 2, Col + 4] ^= 1;
+                if ((MaskMatrix[Row + 3, Col + 2] & NonData) == 0) MaskMatrix[Row + 3, Col + 2] ^= 1;
+                if ((MaskMatrix[Row + 3, Col + 4] & NonData) == 0) MaskMatrix[Row + 3, Col + 4] ^= 1;
+                if ((MaskMatrix[Row + 4, Col + 2] & NonData) == 0) MaskMatrix[Row + 4, Col + 2] ^= 1;
+                if ((MaskMatrix[Row + 4, Col + 3] & NonData) == 0) MaskMatrix[Row + 4, Col + 3] ^= 1;
+                if ((MaskMatrix[Row + 4, Col + 5] & NonData) == 0) MaskMatrix[Row + 4, Col + 5] ^= 1;
+                if ((MaskMatrix[Row + 5, Col + 4] & NonData) == 0) MaskMatrix[Row + 5, Col + 4] ^= 1;
+                if ((MaskMatrix[Row + 5, Col + 5] & NonData) == 0) MaskMatrix[Row + 5, Col + 5] ^= 1;
             }
         }
 
@@ -2091,29 +2091,29 @@ namespace QRCodeDecoderLibrary
         {
             for (int Row = 0; Row < QRCodeDimension; Row += 6) for (int Col = 0; Col < QRCodeDimension; Col += 6)
             {
-                if ((MaskMatrix[Row, Col] & StaticTables.NonData) == 0) MaskMatrix[Row, Col] ^= 1;
-                if ((MaskMatrix[Row, Col + 2] & StaticTables.NonData) == 0) MaskMatrix[Row, Col + 2] ^= 1;
-                if ((MaskMatrix[Row, Col + 4] & StaticTables.NonData) == 0) MaskMatrix[Row, Col + 4] ^= 1;
+                if ((MaskMatrix[Row, Col] & NonData) == 0) MaskMatrix[Row, Col] ^= 1;
+                if ((MaskMatrix[Row, Col + 2] & NonData) == 0) MaskMatrix[Row, Col + 2] ^= 1;
+                if ((MaskMatrix[Row, Col + 4] & NonData) == 0) MaskMatrix[Row, Col + 4] ^= 1;
 
-                if ((MaskMatrix[Row + 1, Col + 3] & StaticTables.NonData) == 0) MaskMatrix[Row + 1, Col + 3] ^= 1;
-                if ((MaskMatrix[Row + 1, Col + 4] & StaticTables.NonData) == 0) MaskMatrix[Row + 1, Col + 4] ^= 1;
-                if ((MaskMatrix[Row + 1, Col + 5] & StaticTables.NonData) == 0) MaskMatrix[Row + 1, Col + 5] ^= 1;
+                if ((MaskMatrix[Row + 1, Col + 3] & NonData) == 0) MaskMatrix[Row + 1, Col + 3] ^= 1;
+                if ((MaskMatrix[Row + 1, Col + 4] & NonData) == 0) MaskMatrix[Row + 1, Col + 4] ^= 1;
+                if ((MaskMatrix[Row + 1, Col + 5] & NonData) == 0) MaskMatrix[Row + 1, Col + 5] ^= 1;
 
-                if ((MaskMatrix[Row + 2, Col] & StaticTables.NonData) == 0) MaskMatrix[Row + 2, Col] ^= 1;
-                if ((MaskMatrix[Row + 2, Col + 4] & StaticTables.NonData) == 0) MaskMatrix[Row + 2, Col + 4] ^= 1;
-                if ((MaskMatrix[Row + 2, Col + 5] & StaticTables.NonData) == 0) MaskMatrix[Row + 2, Col + 5] ^= 1;
+                if ((MaskMatrix[Row + 2, Col] & NonData) == 0) MaskMatrix[Row + 2, Col] ^= 1;
+                if ((MaskMatrix[Row + 2, Col + 4] & NonData) == 0) MaskMatrix[Row + 2, Col + 4] ^= 1;
+                if ((MaskMatrix[Row + 2, Col + 5] & NonData) == 0) MaskMatrix[Row + 2, Col + 5] ^= 1;
 
-                if ((MaskMatrix[Row + 3, Col + 1] & StaticTables.NonData) == 0) MaskMatrix[Row + 3, Col + 1] ^= 1;
-                if ((MaskMatrix[Row + 3, Col + 3] & StaticTables.NonData) == 0) MaskMatrix[Row + 3, Col + 3] ^= 1;
-                if ((MaskMatrix[Row + 3, Col + 5] & StaticTables.NonData) == 0) MaskMatrix[Row + 3, Col + 5] ^= 1;
+                if ((MaskMatrix[Row + 3, Col + 1] & NonData) == 0) MaskMatrix[Row + 3, Col + 1] ^= 1;
+                if ((MaskMatrix[Row + 3, Col + 3] & NonData) == 0) MaskMatrix[Row + 3, Col + 3] ^= 1;
+                if ((MaskMatrix[Row + 3, Col + 5] & NonData) == 0) MaskMatrix[Row + 3, Col + 5] ^= 1;
 
-                if ((MaskMatrix[Row + 4, Col] & StaticTables.NonData) == 0) MaskMatrix[Row + 4, Col] ^= 1;
-                if ((MaskMatrix[Row + 4, Col + 1] & StaticTables.NonData) == 0) MaskMatrix[Row + 4, Col + 1] ^= 1;
-                if ((MaskMatrix[Row + 4, Col + 2] & StaticTables.NonData) == 0) MaskMatrix[Row + 4, Col + 2] ^= 1;
+                if ((MaskMatrix[Row + 4, Col] & NonData) == 0) MaskMatrix[Row + 4, Col] ^= 1;
+                if ((MaskMatrix[Row + 4, Col + 1] & NonData) == 0) MaskMatrix[Row + 4, Col + 1] ^= 1;
+                if ((MaskMatrix[Row + 4, Col + 2] & NonData) == 0) MaskMatrix[Row + 4, Col + 2] ^= 1;
 
-                if ((MaskMatrix[Row + 5, Col + 1] & StaticTables.NonData) == 0) MaskMatrix[Row + 5, Col + 1] ^= 1;
-                if ((MaskMatrix[Row + 5, Col + 2] & StaticTables.NonData) == 0) MaskMatrix[Row + 5, Col + 2] ^= 1;
-                if ((MaskMatrix[Row + 5, Col + 3] & StaticTables.NonData) == 0) MaskMatrix[Row + 5, Col + 3] ^= 1;
+                if ((MaskMatrix[Row + 5, Col + 1] & NonData) == 0) MaskMatrix[Row + 5, Col + 1] ^= 1;
+                if ((MaskMatrix[Row + 5, Col + 2] & NonData) == 0) MaskMatrix[Row + 5, Col + 2] ^= 1;
+                if ((MaskMatrix[Row + 5, Col + 3] & NonData) == 0) MaskMatrix[Row + 5, Col + 3] ^= 1;
             }
     }
     }
